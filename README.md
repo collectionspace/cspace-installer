@@ -13,7 +13,7 @@ CollectionSpace system will be installed onto the target machine:
 - [Postgres](#) database server
 
 All of the standard CollectionSpace tenants can be enabled via
-configuration and by using one (or more) of the standard tenants
+configuration and by using one (or more) of the provided tenants
 your CollectionSpace system will be on the recommended and supported
 upgrade path.
 
@@ -51,7 +51,7 @@ On a self hosted / managed server you will need:
 Servers created by Terraform will have these requirements
 pre-installed.
 
-Hardware requirements: 2 cpu, at least 4GB RAM, 50GB disk.
+Hardware requirements are: 2 cpu, at least 4GB RAM, 50GB disk.
 
 ## Steps
 
