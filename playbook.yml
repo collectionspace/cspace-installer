@@ -6,6 +6,12 @@
   gather_facts: false
   become: yes
 
+  handlers:
+    - name: restart ssh
+      service:
+        name: ssh
+        state: restarted
+
   pre_tasks:
     - import_tasks: includes/bootstrap.yml
 
