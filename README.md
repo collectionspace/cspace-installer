@@ -46,7 +46,7 @@ you can run the installer using [WSL](#) (Windows Subsystem for Linux).
 
 On your local machine install:
 
-- Ansible v2.8+
+- Ansible v2.9+
 - Git (optional, if you want to version control your configuration)
 - Python 3.6+ (required by Ansible, probably already installed)
 - Terraform v0.12+ (optional, only if you need to create a server)

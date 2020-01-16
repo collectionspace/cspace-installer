@@ -13,6 +13,14 @@
         state: restarted
 
   pre_tasks:
+    - name: Verify Ansible meets installer minimum version requirement
+      assert:
+        that: "ansible_version.full is version_compare(ansible_min_version, '>=')"
+        fail_msg: >
+          "Ansible {{ ansible_version.full }} must be at least version: {{ ansible_min_version }}"
+        success_msg: >
+          "Ok! Using Ansible: {{ ansible_version.full }}"
+
     - import_tasks: includes/bootstrap.yml
 
   tasks: []
