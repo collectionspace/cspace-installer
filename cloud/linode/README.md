@@ -14,13 +14,9 @@ Update the values in `terraform.tfvars`.
 
 ### authorized_key
 
-An [SSH public key](#).
+An [SSH public key](#) added to the root account.
 
-### authorized_user
-
-A username for a user that will be created for SSH connections using the authorized key.
-
-### instance_type
+### instance_type (default: g6-standard-2)
 
 The [Linode instance type](#).
 

@@ -2,7 +2,7 @@
 variable "authorized_key" {}
 variable "authorized_user" { default = "deploy" }
 variable "backups_enabled" { default = false }
-variable "instance_type" { default = "g6-standard-1" }
+variable "instance_type" { default = "g6-standard-2" }
 variable "root_pass" {}
 variable "region" { default = "us-central" }
 variable "token" {}
@@ -20,7 +20,6 @@ provider "linode" {
 # RESOURCES
 resource "linode_instance" "collectionspace" {
   authorized_keys = [var.authorized_key]
-  authorized_users = [var.authorized_user]
   backups_enabled = var.backups_enabled
   group = "collectionspace"
   image = "linode/ubuntu18.04"
@@ -33,5 +32,5 @@ resource "linode_instance" "collectionspace" {
 }
 
 output "ip_address" {
-  value = linode_instance.ip_address
+  value = linode_instance.collectionspace.ip_address
 }
