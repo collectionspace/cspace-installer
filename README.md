@@ -101,16 +101,22 @@ mkdir inventory/production # or 'staging', 'test' etc.
 cp inventory/example/hosts inventory/production/
 ```
 
-Update the config for a production deployment (will generate SSL certs):
+Update the config following the instructions in file.
 
-```txt
-[collectionspace:vars]
-env=production # or 'staging', 'test' etc. latter will disable SSL cert creation
-tenants=core # list of enabled tenants: "core,fcart" etc. Generally pick 1.
+Running the playbook requires a user with `sudo` privileges:
 
-[collectionspace]
-cspace.example.org # SSH server hostname or IP address i.e. 100.101.23.2
+```bash
+# by default the ssh user is the current user, and the ssh key is ~/.ssh/id_rsa
+ansible-playbook -i inventory/$environment/hosts playbook.yml
+
+# the user / key can be specified on the command line
+ansible-playbook -i inventory/$environment/hosts playbook.yml \
+  --user=admin \
+  --private-key=~/.ssh/admin
 ```
+
+See the [ansible-playbook](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)
+docs for all of the CLI connection options.
 
 ## License
 
