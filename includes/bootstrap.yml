@@ -1,0 +1,30 @@
+---
+
+- name: Install packages
+  apt:
+    update_cache: true
+    pkg:
+      - fail2ban
+      - openjdk-8-jre-headless
+      - ufw
+
+- name: Set allowed SSH ip addresses for firewall
+  ufw:
+    rule: allow
+    port: "22"
+    src: "{{ item }}"
+  loop: "{{ ssh_allowed_ip_addresses.split(',') }}"
+
+- name: Allow HTTP/S port access
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  loop:
+    - '80'
+    - '443'
+
+- name: Set default deny firewall policy
+  ufw:
+    state: enabled
+    policy: deny

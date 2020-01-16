@@ -1,1 +1,12 @@
 ---
+# Testing:
+# IP=`curl http://checkip.amazonaws.com` ansible-playbook -i inventory/example/hosts playbook.yml -u root -e ssh_allowed_ip_addresses=$IP
+
+- hosts: collectionspace
+  gather_facts: false
+  become: yes
+
+  pre_tasks:
+    - import_tasks: includes/bootstrap.yml
+
+  tasks: []
