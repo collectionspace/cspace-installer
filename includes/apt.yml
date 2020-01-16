@@ -1,9 +1,23 @@
 ---
 
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: 'True'
+    update_cache: 'True'
+    cache_valid_time: 86400
+
 - name: Install packages
   apt:
-    update_cache: true
     pkg:
       - fail2ban
       - openjdk-8-jre-headless
       - ufw
+      - unattended-upgrades
+
+- name: Enable periodic updates
+  copy:
+    src: 10periodic
+    dest: /etc/apt/apt.conf.d/10periodic
+    owner: root
+    group: root
+    mode: 0644
