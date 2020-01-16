@@ -3,8 +3,9 @@
 **Work in progress: targeting v5.3 (03/2020) for v1.0 release**
 
 The installer provides an [Ansible](#) playbook for setting up
-[CollectionSpace](#) on a remote server. All of the components in a
-CollectionSpace system will be installed onto the target machine:
+[CollectionSpace](#) on a remote [Ubuntu](#) server. All of the
+components in a CollectionSpace system will be installed onto the
+target machine:
 
 - CollectionSpace application
 - CollectionSpace public gateway
@@ -17,7 +18,20 @@ configuration and by using one (or more) of the provided tenants
 your CollectionSpace system will be on the recommended and supported
 upgrade path.
 
-If you don't have a server to use currently there are also [Terraform](#)
+Some minimal system configuration updates are applied, including:
+
+- Firewall is enabled (default deny policy) with execeptions for HTTP & SSH
+- Software packages are updated automatically
+- SSH ip addresses can be whitelisted (default: all)
+- SSH password authentication is disabled
+
+These are baseline security features that are required to facilitate
+installer development. Otherwise the installer attempts to be as
+unopinionated as possible on the target machine so your preferences for
+tools like backups, monitoring, user management etc. can be decided and
+applied separately.
+
+If you don't have a server to use currently there are [Terraform](#)
 configurations for creating a server on these platforms:
 
 - [AWS](#) using [Lightsail](#)
@@ -34,7 +48,7 @@ On your local machine install:
 
 - Ansible v2.8+
 - Git (optional, if you want to version control your configuration)
-- Python 3.6+ (required by Ansible)
+- Python 3.6+ (required by Ansible, probably already installed)
 - Terraform v0.12+ (optional, only if you need to create a server)
 
 *If you're on Windows install the requirements using the WSL shell.*
@@ -46,12 +60,16 @@ On a self hosted / managed server you will need:
 
 - Ubuntu 18.04 LTS
 - Python 3.6+
-- SSH enabled
+- SSH enabled and a user with an authorized SSH key
 
 Servers created by Terraform will have these requirements
 pre-installed.
 
-Minimum hardware requirements are: 2 cpu, at least 4GB RAM, 50GB disk.
+Minimum hardware requirements are:
+
+- 2 cpu
+- 4GB RAM
+- 50GB disk
 
 ## Steps
 
@@ -67,7 +85,8 @@ Follow the instructions for the server provider of your choice:
 - [Microsoft Azure](#)
 
 These are just a few of the more popular options, but you can use
-any server provider so long as the server is reachable using SSH.
+any server provider so long as the server is reachable via SSH
+using an [SSH key](#) for authentication.
 
 ### Add DNS for server (optional)
 
@@ -84,6 +103,24 @@ disabled by setting the Ansible environment to `test` (more details
 below). You can then access CollectionSpace by domain or IP address
 without SSL.
 
+### Verify SSH connection
+
+You should be able to SSH to the server using an SSH key for
+authentication:
+
+```bash
+# assumes current username for user and ~/.ssh/id_rsa for key
+ssh $hostname
+# specify username, assumes ~/.ssh/id_rsa for key
+ssh $username@$hostname
+# specify username, key
+ssh -i /path/to/key $username@$hostname
+```
+
+You may receive a `passphrase` prompt if your SSH key has one, but
+you should not receive a `password` prompt if key authentication is
+being used.
+
 ### Setup Ansible
 
 Start by downloading the Ansible roles (libraries):
@@ -96,9 +133,10 @@ ansible-galaxy ...
 For Ansible to setup CollectionSpace on your server you will need to
 create an inventory file:
 
-```
-mkdir inventory/production # or 'staging', 'test' etc.
-cp inventory/example/hosts inventory/production/
+```bash
+ENVIRONMENT=production # or 'staging', 'test' etc.
+mkdir inventory/$ENVIRONMENT
+cp inventory/example/hosts inventory/$ENVIRONMENT/
 ```
 
 Update the config following the instructions in file.
@@ -107,10 +145,10 @@ Running the playbook requires a user with `sudo` privileges:
 
 ```bash
 # by default the ssh user is the current user, and the ssh key is ~/.ssh/id_rsa
-ansible-playbook -i inventory/$environment/hosts playbook.yml
+ansible-playbook -i inventory/$ENVIRONMENT/hosts playbook.yml
 
 # the user / key can be specified on the command line
-ansible-playbook -i inventory/$environment/hosts playbook.yml \
+ansible-playbook -i inventory/$ENVIRONMENT/hosts playbook.yml \
   --user=admin \
   --private-key=~/.ssh/admin
 ```

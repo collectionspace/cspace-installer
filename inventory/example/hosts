@@ -1,5 +1,5 @@
 [collectionspace:vars]
-# env: 'production', 'staging' etc. 'test' will disable SSL cert creation.
+# env: 'production', 'staging', 'test' etc. 'test' will disable SSL cert creation.
 env=test
 # ssh_allowed_ip_addresses: comma separated list of ip addresses for SSH. Example allows all.
 ssh_allowed_ip_addresses=0.0.0.0/0
@@ -7,4 +7,5 @@ ssh_allowed_ip_addresses=0.0.0.0/0
 tenants=core,fcart,materials,publicart
 
 [collectionspace]
+# hostname or ip address of the target server for collectionspace
 installer.collectionspace.org
