@@ -1,0 +1,19 @@
+---
+
+# ENV: 'production', 'staging', 'test' etc.
+# Using 'test' will disable SSL cert creation.
+env: test
+
+# List of ip addresses for SSH.
+# Example uses lookup current location ip address.
+# We recommend using an explicit list of known and trusted IP addresses.
+ssh_allowed_ip_addresses:
+  # - 0.0.0.0/0 # allow all
+  - "{{ lookup('url', 'http://checkip.amazonaws.com', split_lines=False) | replace('\n', '') }}"
+
+# CollectionSpace tenants that will be enabled
+tenants:
+  - core
+  - fcart
+  - materials
+  - publicart

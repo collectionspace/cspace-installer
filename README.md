@@ -20,9 +20,9 @@ upgrade path.
 
 Some minimal system configuration updates are applied, including:
 
-- Firewall is enabled (default deny policy) with execeptions for HTTP & SSH
+- Firewall is enabled (default deny policy) with exceptions for HTTP & SSH
 - Software packages are updated automatically
-- SSH ip addresses can be whitelisted (default: all)
+- SSH ip addresses can be whitelisted (default: current location IP address)
 - SSH password authentication is disabled
 
 These are baseline security features that are required to facilitate
@@ -31,13 +31,15 @@ unopinionated as possible on the target machine so your preferences for
 tools like backups, monitoring, user management etc. can be decided and
 applied separately.
 
+We strongly advise starting with newly created server and a freshly
+installed OS as a buildup to a production deployment.
+
 If you don't have a server to use currently there are [Terraform](#)
 configurations for creating a server on these platforms:
 
 - [AWS](#) using [Lightsail](#)
 - [Digital Ocean](#)
 - [Linode](#)
-- [Microsoft Azure](#)
 
 The installer is tested on Mac OS and Ubuntu Linux. If you're on Windows
 you can run the installer using [WSL](#) (Windows Subsystem for Linux).
@@ -82,7 +84,6 @@ Follow the instructions for the server provider of your choice:
 - [AWS](#)
 - [Digital Ocean](#)
 - [Linode](cloud/linode/README.md)
-- [Microsoft Azure](#)
 
 These are just a few of the more popular options, but you can use
 any server provider so long as the server is reachable via SSH
@@ -110,11 +111,11 @@ authentication:
 
 ```bash
 # assumes current username for user and ~/.ssh/id_rsa for key
-ssh $hostname
+ssh $HOSTNAME
 # specify username, assumes ~/.ssh/id_rsa for key
-ssh $username@$hostname
+ssh $USERNAME@$HOSTNAME
 # specify username, key
-ssh -i /path/to/key $username@$hostname
+ssh -i /path/to/key $USERNAME@$HOSTNAME
 ```
 
 You may receive a `passphrase` prompt if your SSH key has one, but
@@ -131,12 +132,10 @@ ansible-galaxy ...
 ```
 
 For Ansible to setup CollectionSpace on your server you will need to
-create an inventory file:
+create a variables file:
 
 ```bash
-ENVIRONMENT=production # or 'staging', 'test' etc.
-mkdir inventory/$ENVIRONMENT
-cp inventory/example/hosts inventory/$ENVIRONMENT/
+cp vars/example.yml vars/deploy.yml
 ```
 
 Update the config following the instructions in file.
@@ -145,13 +144,16 @@ Running the playbook requires a user with `sudo` privileges:
 
 ```bash
 # by default the ssh user is the current user, and the ssh key is ~/.ssh/id_rsa
-ansible-playbook -i inventory/$ENVIRONMENT/hosts playbook.yml
+ansible-playbook -i $HOSTNAME, playbook.yml -e @vars/deploy.yml
 
 # the user / key can be specified on the command line
-ansible-playbook -i inventory/$ENVIRONMENT/hosts playbook.yml \
+ansible-playbook -i $HOSTNAME, playbook.yml \
   --user=admin \
-  --private-key=~/.ssh/admin
+  --private-key=~/.ssh/admin \
+  --extra-vars=@vars/deploy.yml
 ```
+
+**Important: the "," after $HOSTNAME is required!**
 
 See the [ansible-playbook](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)
 docs for all of the CLI connection options.

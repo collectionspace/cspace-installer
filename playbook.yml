@@ -1,8 +1,8 @@
 ---
 # Testing:
-# IP=`curl http://checkip.amazonaws.com` ansible-playbook -i inventory/example/hosts playbook.yml -u root -e ssh_allowed_ip_addresses=$IP
+# ansible-playbook -i installer.collectionspace.org, playbook.yml -u root -e @vars/example.yml
 
-- hosts: collectionspace
+- hosts: all
   gather_facts: false
   become: yes
 

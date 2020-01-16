@@ -5,7 +5,7 @@
     rule: allow
     port: "22"
     src: "{{ item }}"
-  loop: "{{ ssh_allowed_ip_addresses.split(',') }}"
+  loop: "{{ ssh_allowed_ip_addresses }}"
 
 - name: Allow HTTP/S port access
   ufw:
