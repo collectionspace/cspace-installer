@@ -1,0 +1,6 @@
+[collectionspace:vars]
+env=test
+tenants=core,fcart,materials,publicart
+
+[collectionspace]
+installer.collectionspace.org
