@@ -51,7 +51,7 @@ On a self hosted / managed server you will need:
 Servers created by Terraform will have these requirements
 pre-installed.
 
-Hardware requirements are: 2 cpu, at least 4GB RAM, 50GB disk.
+Minimum hardware requirements are: 2 cpu, at least 4GB RAM, 50GB disk.
 
 ## Steps
 
@@ -66,7 +66,7 @@ Follow the instructions for the server provider of your choice:
 - [Linode](cloud/linode/README.md)
 - [Microsoft Azure](#)
 
-Those are just a few of the more popular options, but you can use
+These are just a few of the more popular options, but you can use
 any server provider so long as the server is reachable using SSH.
 
 ### Add DNS for server (optional)
