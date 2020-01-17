@@ -31,7 +31,7 @@ unopinionated as possible on the target machine so your preferences for
 tools like backups, monitoring, user management etc. can be decided and
 applied separately.
 
-We strongly advise starting with newly created server and a freshly
+We strongly advise starting with a newly created server and a freshly
 installed OS as a buildup to a production deployment.
 
 If you don't have a server to use currently there are [Terraform](#)
