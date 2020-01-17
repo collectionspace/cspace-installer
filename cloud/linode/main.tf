@@ -1,5 +1,5 @@
 # VARIABLES
-variable "authorized_key" {}
+variable "authorized_key" { default = "~/.ssh/id_rsa.pub" }
 variable "authorized_user" { default = "deploy" }
 variable "backups_enabled" { default = false }
 variable "instance_type" { default = "g6-standard-2" }
@@ -17,9 +17,13 @@ provider "linode" {
   token = var.token
 }
 
+data "local_file" "public_key" {
+  filename = pathexpand(var.authorized_key)
+}
+
 # RESOURCES
 resource "linode_instance" "collectionspace" {
-  authorized_keys = [var.authorized_key]
+  authorized_keys = [trimspace(data.local_file.public_key.content)]
   backups_enabled = var.backups_enabled
   group = "collectionspace"
   image = "linode/ubuntu18.04"

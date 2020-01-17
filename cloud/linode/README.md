@@ -12,19 +12,19 @@ Update the values in `terraform.tfvars`.
 
 ## Variables
 
-### authorized_key
+### authorized_key (default: ~/.ssh/id_rsa.pub)
 
-An [SSH public key](#) added to the root account.
+Path to an [SSH public key](#) file added to the root account.
 
 ### instance_type (default: g6-standard-2)
 
 The [Linode instance type](#).
 
-### root_pass
+### root_pass (required)
 
 Password for the root user.
 
-### token
+### token (required)
 
 Your [Linode API token](#).
 
