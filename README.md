@@ -13,10 +13,10 @@ target machine:
 - [Nginx](#) web proxy
 - [Postgres](#) database server
 
-All of the standard CollectionSpace tenants can be enabled via
-configuration and by using one (or more) of the provided tenants
-your CollectionSpace system will be on the recommended and supported
-upgrade path.
+All of the standard CollectionSpace tenants can be enabled via a
+single configuration file and by using one (or more) of the provided
+tenants your CollectionSpace system will be on the recommended and
+supported upgrade path.
 
 Some minimal system configuration updates are applied, including:
 
@@ -73,9 +73,7 @@ Minimum hardware requirements are:
 - 4GB RAM
 - 50GB disk
 
-## Steps
-
-### Create infrastructure
+## Create infrastructure
 
 **If you already have a server then you can skip this step.**
 
@@ -89,7 +87,7 @@ These are just a few of the more popular options, but you can use
 any server provider so long as the server is reachable via SSH
 using an [SSH key](#) for authentication.
 
-### Add DNS for server (optional)
+## Add DNS for server (optional)
 
 We recommend creating an `A record` (or other as preferred) DNS entry
 for the server. For example:
@@ -104,7 +102,7 @@ disabled by setting the Ansible environment to `test` (more details
 below). You can then access CollectionSpace by domain or IP address
 without SSL.
 
-### Verify SSH connection
+## Verify SSH connection
 
 You should be able to SSH to the server using an SSH key for
 authentication:
@@ -122,7 +120,7 @@ You may receive a `passphrase` prompt if your SSH key has one, but
 you should not receive a `password` prompt if key authentication is
 being used.
 
-### Setup Ansible
+## Setup Ansible
 
 Start by downloading the Ansible roles (libraries):
 
@@ -138,7 +136,10 @@ create a variables file:
 cp vars/example.yml vars/deploy.yml
 ```
 
-Update the config following the instructions in file.
+Update the config following the instructions in file. Be sure to create
+a secure backup of this file.
+
+## Running Ansible
 
 Running the playbook requires a user with `sudo` privileges:
 
