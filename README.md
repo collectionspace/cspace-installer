@@ -49,14 +49,10 @@ you can run the installer using [WSL](#) (Windows Subsystem for Linux).
 On your local machine install:
 
 - Ansible v2.9+
-- Git (optional, if you want to version control your configuration)
 - Python 3.6+ (required by Ansible, probably already installed)
 - Terraform v0.12+ (optional, only if you need to create a server)
 
 *If you're on Windows install the requirements using the WSL shell.*
-
-With Ansible installed download this repository, but if you are
-comfortable with Git you may prefer to fork and clone it instead.
 
 On a self hosted / managed server you will need:
 
@@ -120,9 +116,12 @@ You may receive a `passphrase` prompt if your SSH key has one, but
 you should not receive a `password` prompt if key authentication is
 being used.
 
-## Setup Ansible
+## Download playbook and setup Ansible
 
-Start by downloading the Ansible roles (libraries):
+Begin by [downloading the playbook](#) and unzipping it, or cloning it if
+using [git](#).
+
+From the playbook directory pull the Ansible roles (libraries):
 
 ```bash
 cd /path/to/cspace-installer
@@ -137,7 +136,8 @@ cp vars/example.yml vars/deploy.yml
 ```
 
 Update the config following the instructions in file. Be sure to create
-a secure backup of this file.
+a secure backup of this file as you'll need it every time the playbook
+is run.
 
 ## Running Ansible
 
