@@ -1,0 +1,13 @@
+---
+
+- name: Install packages
+  apt:
+    pkg:
+      - ant
+      - git
+      - imagemagick
+      - maven
+      - openjdk-8-jdk
+      - openjdk-8-jre-headless
+      - wget
+    update_cache: True

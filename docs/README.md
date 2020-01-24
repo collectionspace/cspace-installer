@@ -126,3 +126,16 @@ ansible-playbook -i $HOSTNAME, playbook.yml \
 
 See the [ansible-playbook](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)
 docs for all of the CLI connection options.
+
+You can use `tags` to limit the range of tasks that are run:
+
+```bash
+ansible-playbook -i installer.collectionspace.org, playbook.yml --list-tags
+
+# run only the collectionspace role tasks
+ansible-playbook -i $HOSTNAME, playbook.yml \
+  --user=admin \
+  --private-key=~/.ssh/admin \
+  --extra-vars=@vars/deploy.yml \
+  --tags=collectionspace
+```

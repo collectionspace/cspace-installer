@@ -25,8 +25,14 @@
 
   roles:
     - role: postgresql
+      tags: ['db', 'postgres']
     - role: elasticsearch
+      tags: ['es', 'search']
+    - role: collectionspace
+      tags: ['collectionspace', 'cspace']
     - role: certbot
+      tags: ['certs']
     - role: nginx
+      tags: ['nginx', 'web']
 
   tasks: []

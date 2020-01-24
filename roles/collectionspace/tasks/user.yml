@@ -1,0 +1,12 @@
+---
+
+- name: Ensure collectionspace group exists
+  group:
+    name: collectionspace
+    state: present
+
+- name: Ensure collectionspace user exists
+  user:
+    name: collectionspace
+    state: present
+    group: collectionspace

@@ -10,7 +10,6 @@
   apt:
     pkg:
       - fail2ban
-      - openjdk-8-jre-headless
       - ufw
       - unattended-upgrades
 
