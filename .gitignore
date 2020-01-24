@@ -3,4 +3,5 @@
 .terraform/
 *.tfvars
 *.tfstate
+roles/
 vars/local.yml

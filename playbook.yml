@@ -3,7 +3,7 @@
 # ansible-playbook -i installer.collectionspace.org, playbook.yml -u root -e @vars/example.yml
 
 - hosts: all
-  gather_facts: false
+  gather_facts: true
   become: yes
 
   handlers:
@@ -22,5 +22,11 @@
           "Ok! Using Ansible: {{ ansible_version.full }}"
 
     - import_tasks: includes/bootstrap.yml
+
+  roles:
+    - role: postgresql
+    - role: elasticsearch
+    - role: certbot
+    - role: nginx
 
   tasks: []

@@ -1,1 +1,17 @@
 ---
+
+- src: https://github.com/geerlingguy/ansible-role-certbot.git
+  name: certbot
+  version: 3.0.3
+
+- src: https://github.com/geerlingguy/ansible-role-elasticsearch
+  name: elasticsearch
+  version: 4.1.0
+
+- src: https://github.com/geerlingguy/ansible-role-nginx
+  name: nginx
+  version: 2.7.0
+
+- src: https://github.com/geerlingguy/ansible-role-postgresql
+  name: postgresql
+  version: 2.0.1

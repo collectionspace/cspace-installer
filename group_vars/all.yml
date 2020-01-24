@@ -1,3 +1,22 @@
 ---
 
-ansible_min_version: "2.9"
+# ANSIBLE
+ansible_min_version: '2.9'
+
+# CERTBOT
+certbot_auto_renew_options: --agree-tos --no-self-upgrade --pre-hook "service nginx stop" --post-hook "service nginx start"
+certbot_auto_renew_user: root
+certbot_create_if_missing: yes
+certbot_install_from_source: yes
+
+# COLLECTIONSPACE
+cspace_version: '5.2'
+
+# ELASTICSEACH
+elasticsearch_version: '5.x'
+
+# NGINX
+nginx_remove_default_vhost: false # TODO: update 'true'
+
+# POSTGRES
+postgresql_version: '9.6'

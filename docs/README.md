@@ -1,14 +1,16 @@
 ## Setup
 
-If you don't have a server to use currently there are [Terraform](#)
-configurations for creating a server on these platforms:
+If you don't have a server to use currently there are
+[Terraform](https://www.terraform.io/) configurations for creating a
+server on these platforms:
 
-- [AWS](#) using [Lightsail](#)
-- [Digital Ocean](#)
-- [Linode](#)
+- [AWS](https://aws.amazon.com/) using [Lightsail](https://aws.amazon.com/lightsail/)
+- [Digital Ocean](https://www.digitalocean.com/)
+- [Linode](https://www.linode.com/)
 
 The installer is tested on Mac OS and Ubuntu Linux. If you're on Windows
-you can run the installer using [WSL](#) (Windows Subsystem for Linux).
+you can run the installer using [WSL](https://docs.microsoft.com/en-us/windows/wsl/about)
+(Windows Subsystem for Linux).
 
 ## Requirements
 
@@ -41,13 +43,13 @@ Minimum hardware requirements are:
 
 Follow the instructions for the server provider of your choice:
 
-- [AWS](#)
-- [Digital Ocean](#)
-- [Linode](cloud/linode/README.md)
+- [AWS](../cloud/aws/README.md)
+- [Digital Ocean](../cloud/digitalocean/README.md)
+- [Linode](../cloud/linode/README.md)
 
 These are just a few of the more popular options, but you can use
 any server provider so long as the server is reachable via SSH
-using an [SSH key](#) for authentication.
+using an [SSH key](https://www.ssh.com/ssh/key) for authentication.
 
 ## Add DNS for server (optional)
 
@@ -58,10 +60,10 @@ for the server. For example:
 
 Then you will access ColletionSpace at: https://cspace.example.org
 
-The installer uses [Lets Encrypt](#) to generate an SSL certificate
-to protect the publicly accessible site. For testing this can be
-disabled by setting the Ansible environment to `test` (more details
-below). You can then access CollectionSpace by domain or IP address
+The installer uses [Lets Encrypt](https://letsencrypt.org/) to generate
+an SSL certificate to protect the publicly accessible site. For testing
+this can be disabled by setting the Ansible environment to `test` (more
+details below). You can then access CollectionSpace by domain or IP address
 without SSL.
 
 ## Verify SSH connection
@@ -85,13 +87,13 @@ being used.
 ## Download playbook and setup Ansible
 
 Begin by [downloading the playbook](#) and unzipping it, or cloning it if
-using [git](#).
+using [git](https://git-scm.com/).
 
 From the playbook directory pull the Ansible roles (libraries):
 
 ```bash
 cd /path/to/cspace-installer
-ansible-galaxy ...
+ansible-galaxy install -r requirements.yml --force
 ```
 
 For Ansible to setup CollectionSpace on your server you will need to

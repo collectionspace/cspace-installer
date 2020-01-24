@@ -2,16 +2,16 @@
 
 **Work in progress: targeting v5.3 (03/2020) for v1.0 release**
 
-The installer provides an [Ansible](#) playbook for setting up
-[CollectionSpace](#) on a remote [Ubuntu](#) server. All of the
-components in a CollectionSpace system will be installed onto the
-target machine:
+The installer provides an [Ansible](https://www.ansible.com/) playbook
+for setting up [CollectionSpace](https://www.collectionspace.org/) on a
+remote [Ubuntu](https://ubuntu.com/) server. All of the components in a
+CollectionSpace system will be installed onto the target machine:
 
 - CollectionSpace application
 - CollectionSpace public gateway
-- [ElasticSearch](#)
-- [Nginx](#) web proxy
-- [Postgres](#) database server
+- [ElasticSearch](https://www.elastic.co/)
+- [Nginx](https://www.nginx.com/) web proxy
+- [Postgres](https://www.postgresql.org/) database server
 
 All of the standard CollectionSpace tenants can be enabled via a
 single configuration file and by using one (or more) of the provided
