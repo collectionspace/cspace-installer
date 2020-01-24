@@ -130,7 +130,7 @@ docs for all of the CLI connection options.
 You can use `tags` to limit the range of tasks that are run:
 
 ```bash
-ansible-playbook -i installer.collectionspace.org, playbook.yml --list-tags
+ansible-playbook -i $HOSTNAME, playbook.yml --list-tags
 
 # run only the collectionspace role tasks
 ansible-playbook -i $HOSTNAME, playbook.yml \
