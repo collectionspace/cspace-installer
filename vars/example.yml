@@ -3,6 +3,9 @@
 # Email address to receive certbot notifications
 certbot_admin_email: no-reply@example.com
 
+# Password for the csadmin database user (be sure to keep this SECRET!)
+collectionspace_csadmin_password: keepmesecretplz
+
 # ENV: 'production', 'staging', 'test' etc.
 # Using 'test' will disable SSL cert creation.
 env: test

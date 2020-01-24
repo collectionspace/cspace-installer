@@ -19,4 +19,8 @@ elasticsearch_version: '5.x'
 nginx_remove_default_vhost: false # TODO: update 'true'
 
 # POSTGRES
-postgresql_version: '9.6'
+postgresql_users:
+  - name: csadmin
+    password: "{{ collectionspace_csadmin_password }}"
+    role_attr_flags: 'SUPERUSER,INHERIT,NOCREATEDB,NOCREATEROLE,NOREPLICATION'
+    state: present

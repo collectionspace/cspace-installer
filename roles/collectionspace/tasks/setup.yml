@@ -9,5 +9,23 @@
       - maven
       - openjdk-8-jdk
       - openjdk-8-jre-headless
+      - python-psycopg2
+      - python3-psycopg2
       - wget
     update_cache: True
+
+- name: Transfer casts SQL to server
+  copy:
+    src: casts.sql
+    dest: /root/casts.sql
+    mode: '0644'
+  register: casts
+
+- name: Setup datatype casts
+  postgresql_query:
+    db: template1
+    login_host: localhost
+    login_user: csadmin
+    login_password: "{{ collectionspace_csadmin_password }}"
+    path_to_script: /root/casts.sql
+  when: casts.changed
