@@ -2,3 +2,4 @@
 
 - import_tasks: user.yml
 - import_tasks: setup.yml
+- import_tasks: download.yml

@@ -1,6 +1,6 @@
 ---
 
-- name: Ensure collectionspace group exists
+- name: Ensure Collectionspace group exists
   group:
     name: collectionspace
     state: present

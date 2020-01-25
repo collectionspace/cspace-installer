@@ -1,4 +1,5 @@
 ---
 
 collectionspace_csadmin_password: False
+collectionspace_tomcat_version: apache-tomcat-8.5.40
 collectionspace_version: '5.2'

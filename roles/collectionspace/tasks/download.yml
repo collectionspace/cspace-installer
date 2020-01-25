@@ -1,0 +1,36 @@
+---
+
+- name: Download the CollectionSpace server
+  unarchive:
+    src: "https://s3-us-west-2.amazonaws.com/cs-public-shared-files/releases/{{ collectionspace_version }}/cspace-server-{{ collectionspace_version }}.tar.gz"
+    dest: /opt/collectionspace
+    remote_src: yes
+    owner: collectionspace
+    group: collectionspace
+  register: download
+
+- name: Create a symlink for the server
+  file:
+    src: "/opt/collectionspace/{{ collectionspace_tomcat_version }}"
+    dest: /opt/collectionspace/server
+    state: link
+    owner: collectionspace
+    group: collectionspace
+  when: download.changed
+
+- name: Download the CollectionSpace applications
+  git:
+    repo: "https://github.com/collectionspace/{{ item }}"
+    dest: "/opt/collectionspace/{{ item }}"
+    version: "v{{ collectionspace_version }}"
+  with_items:
+    - application
+    - services
+
+- name: Ensure CollectionSpace user ownernship
+  file:
+    path: /opt/collectionspace
+    state: directory
+    recurse: yes
+    owner: collectionspace
+    group: collectionspace
