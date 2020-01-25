@@ -6,6 +6,10 @@ An Ansible Role that installs CollectionSpace on Ubuntu.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
+    collectionspace_allocated_ram: "1524m"
+
+The amount of memory allocated to CollectionSpace (can use gigabytes i.e. "2g").
+
     collectionspace_csadmin_password: False
 
 The password for the csadmin database user.

@@ -6,6 +6,13 @@ certbot_admin_email: no-reply@example.com
 # Password for the csadmin database user (be sure to keep this SECRET!)
 collectionspace_csadmin_password: keepmesecretplz
 
+# CollectionSpace tenants that will be enabled
+collectionspace_tenants:
+  - core
+  - fcart
+  - materials
+  - publicart
+
 # ENV: 'production', 'staging', 'test' etc.
 # Using 'test' will disable SSL cert creation.
 env: test
@@ -17,9 +24,3 @@ ssh_allowed_ip_addresses:
   # - 0.0.0.0/0 # allow all
   - "{{ lookup('url', 'http://checkip.amazonaws.com', split_lines=False) | replace('\n', '') }}"
 
-# CollectionSpace tenants that will be enabled
-tenants:
-  - core
-  - fcart
-  - materials
-  - publicart

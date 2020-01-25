@@ -10,3 +10,14 @@
     name: collectionspace
     state: present
     group: collectionspace
+    shell: /bin/bash
+
+- name: Set CollectionSpace general environment variables
+  blockinfile:
+    path: /home/collectionspace/.bashrc
+    block: "{{ lookup('template', 'env.j2') }}"
+    owner: collectionspace
+    group: collectionspace
+  no_log: true
+
+# TODO: set tenant env
