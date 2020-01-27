@@ -3,3 +3,5 @@
 - import_tasks: user.yml
 - import_tasks: setup.yml
 - import_tasks: download.yml
+- import_tasks: build.yml
+  when: server.changed or apps.changed or tenants.changed

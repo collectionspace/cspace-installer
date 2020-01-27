@@ -18,6 +18,14 @@
     block: "{{ lookup('template', 'env.j2') }}"
     owner: collectionspace
     group: collectionspace
+    marker: "# {mark} ANSIBLE MANAGED BLOCK CSPACE GENERAL ENV"
   no_log: true
 
-# TODO: set tenant env
+- name: Set CollectionSpace tenant environment variables
+  blockinfile:
+    path: /home/collectionspace/.bashrc
+    block: "{{ lookup('template', 'tenants.j2') }}"
+    owner: collectionspace
+    group: collectionspace
+    marker: "# {mark} ANSIBLE MANAGED BLOCK CSPACE TENANT ENV"
+  register: tenants

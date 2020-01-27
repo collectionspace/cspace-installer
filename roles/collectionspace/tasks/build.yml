@@ -1,0 +1,4 @@
+---
+
+- debug:
+    msg: Building collectionspace (this may take a while )...

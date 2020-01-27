@@ -7,7 +7,7 @@
     remote_src: yes
     owner: collectionspace
     group: collectionspace
-  register: download
+  register: server
 
 - name: Create a symlink for the server
   file:
@@ -16,7 +16,7 @@
     state: link
     owner: collectionspace
     group: collectionspace
-  when: download.changed
+  when: server.changed
 
 - name: Download the CollectionSpace applications
   git:
@@ -26,6 +26,7 @@
   with_items:
     - application
     - services
+  register: apps
 
 - name: Ensure CollectionSpace user ownernship
   file:
