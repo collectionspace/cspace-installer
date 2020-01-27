@@ -1,0 +1,6 @@
+---
+
+- name: restart collectionspace
+  systemd:
+    name: collectionspace
+    state: restarted

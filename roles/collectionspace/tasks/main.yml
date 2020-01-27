@@ -7,3 +7,4 @@
   become: true
   become_user: collectionspace
   when: server.changed or apps.changed or tenants.changed
+- import_tasks: service.yml

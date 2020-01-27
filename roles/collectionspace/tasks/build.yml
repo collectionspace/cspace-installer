@@ -2,6 +2,7 @@
 
 - debug:
     msg: Building collectionspace (this may take a while) ...
+  # notify: restart collectionspace
 
 - name: Build the services layer
   shell: mvn clean install -DskipTests

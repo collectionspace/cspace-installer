@@ -1,0 +1,21 @@
+---
+
+# TODO: create systemd files (config and service)
+
+# - name: Start and enable CollectionSpace
+#   systemd:
+#     name: collectionspace
+#     state: started
+#     enabled: yes
+#     daemon-reload: yes
+#   register: service
+
+# - name: Wait for the CollectionSpace server to bootstrap
+#   wait_for:
+#     path: /opt/collectionspace/server/logs/catalina.out
+#     search_regex: "SERVER STARTUP"
+#     delay: 120
+#     sleep: 5
+#     timeout: 720
+#     msg: "CollectionSpace server bootstrap failed"
+#   when: service.changed
