@@ -1,4 +1,19 @@
 ---
 
 - debug:
-    msg: Building collectionspace (this may take a while )...
+    msg: Building collectionspace (this may take a while) ...
+
+- name: Build the services layer
+  shell: mvn clean install -DskipTests
+  args:
+    chdir: /opt/collectionspace/services
+
+- name: Build the application layer
+  shell: mvn clean install -DskipTests
+  args:
+    chdir: /opt/collectionspace/application
+
+- name: Run the services layer ant tasks
+  shell: ant undeploy deploy create_db import
+  args:
+    chdir: /opt/collectionspace/services

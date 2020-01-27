@@ -4,4 +4,6 @@
 - import_tasks: setup.yml
 - import_tasks: download.yml
 - import_tasks: build.yml
+  become: true
+  become_user: collectionspace
   when: server.changed or apps.changed or tenants.changed
