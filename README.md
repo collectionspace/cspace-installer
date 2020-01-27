@@ -4,8 +4,11 @@
 
 The installer provides an [Ansible](https://www.ansible.com/) playbook
 for setting up [CollectionSpace](https://www.collectionspace.org/) on a
-remote [Ubuntu](https://ubuntu.com/) server. All of the components in a
-CollectionSpace system will be installed onto the target machine:
+remote [Ubuntu](https://ubuntu.com/) server consistent with the [official
+documentation](https://collectionspace.atlassian.net/wiki/spaces/DOC/pages/701465498/Installing+on+Ubuntu+LTS).
+
+All of the components in a CollectionSpace system will be installed onto
+the target machine:
 
 - CollectionSpace application
 - CollectionSpace public gateway
@@ -32,7 +35,10 @@ tools like backups, monitoring, user management etc. can be decided and
 applied separately.
 
 We strongly advise starting with a newly created server and a freshly
-installed OS as a buildup to a production deployment.
+installed OS as a buildup to a production deployment. As you become
+familiar with the installation process and CollectionSpace you may want
+to wipe and reload the Operating System a few times before settling on
+a final configuration / setup.
 
 See the [documentation](docs/README.md) for full instructions.
 
