@@ -1,0 +1,62 @@
+upstream collectionspace {
+	server localhost:8180;
+}
+
+{% if env != 'test' %}
+server {
+	listen 80;
+	listen [::]:80;
+	server_name {{ inventory_hostname }};
+	return 301 https://{{ inventory_hostname }}$request_uri;
+}
+{% endif %}
+
+server {
+	server_name {{ inventory_hostname }};
+	charset utf-8;
+{% if env != 'test' %}
+	isten 443 ssl;
+	listen [::]:443 ssl;
+	ssl_certificate     /etc/letsencrypt/live/{{ inventory_hostname }}/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/{{ inventory_hostname }}/privkey.pem;
+	ssl_protocols       TLSv1.1 TLSv1.2;
+	ssl_ciphers         HIGH:!aNULL:!MD5;
+{% else %}
+	listen 80;
+	listen [::]:80;
+{% endif %}
+
+	gzip              on;
+	gzip_vary         on;
+	gzip_proxied      any;
+	gzip_comp_level   9;
+	gzip_buffers      16 8k;
+	gzip_http_version 1.1;
+	gzip_min_length   256;
+	gzip_types        text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript application/vnd.ms-fontobject application/x-font-ttf font/opentype image/svg+xml image/x-icon;
+
+	proxy_buffer_size       128k;
+	proxy_buffers           4 256k;
+	proxy_busy_buffers_size 256k;
+	proxy_set_header        Host               $host;
+	proxy_set_header        X-Forwarded-For    $proxy_add_x_forwarded_for;
+	proxy_set_header        X-Forwarded-Host   $host;
+	proxy_set_header        X-Forwarded-Server $host;
+	proxy_set_header        X-Forwarded-Proto  $scheme;
+	proxy_set_header        X-Real-IP          $remote_addr;
+
+	location / {
+		return 301 http://{{ inventory_hostname }}/cspace-services/systeminfo;
+	}
+	location /cspace-services {
+		proxy_pass http://collectionspace;
+	}
+	location /cspace-ui/ {
+		proxy_pass http://collectionspace;
+	}
+{% for tenant in collectionspace_tenants %}
+	location /cspace/{{ tenant.name }}/ {
+		proxy_pass http://collectionspace;
+	}
+{% endfor %}
+}

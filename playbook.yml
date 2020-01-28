@@ -38,4 +38,14 @@
     - role: nginx
       tags: ['nginx', 'web']
 
-  tasks: []
+  tasks:
+    - name: Create CollectionSpace vhost config
+      template:
+        src: templates/cspace.conf.j2
+        dest: "/etc/nginx/sites-enabled/cspace.conf"
+        mode: 0644
+      notify: restart nginx
+      tags:
+        - nginx
+        - vhost
+        - web

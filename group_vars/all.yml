@@ -17,7 +17,7 @@ collectionspace_version: '5.2'
 elasticsearch_version: '5.x'
 
 # NGINX
-nginx_remove_default_vhost: false # TODO: update 'true'
+nginx_remove_default_vhost: true
 
 # POSTGRES
 postgresql_users:
