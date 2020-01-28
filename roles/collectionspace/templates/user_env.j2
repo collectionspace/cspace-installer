@@ -1,8 +1,6 @@
-# GENERAL
 {% for key, value in collectionspace_environment.items() %}
-export {{ key }}="{{ value }}"
+{{ key }}="{{ value }}"
 {% endfor %}
-# TENANTS
 {% for tenant in collectionspace_tenants %}
-export CSPACE_{{ tenant | upper }}_CREATE_DISABLED_OPT="false"
+CSPACE_{{ tenant | upper }}_CREATE_DISABLED_OPT="false"
 {% endfor %}

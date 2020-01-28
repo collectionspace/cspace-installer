@@ -22,7 +22,8 @@
   git:
     repo: "https://github.com/collectionspace/{{ item }}"
     dest: "/opt/collectionspace/{{ item }}"
-    version: "v{{ collectionspace_version }}"
+    version: "v{{ collectionspace_version }}-branch"
+    force: yes
   with_items:
     - application
     - services

@@ -1,8 +1,16 @@
 ---
 
-- debug:
+- name: Starting build process
+  debug:
     msg: Building collectionspace (this may take a while) ...
-  # notify: restart collectionspace
+
+- name: Stop CollectionSpace before build
+  systemd:
+    name: collectionspace
+    state: stopped
+  when: >
+    ansible_facts.services['collectionspace.service'] is defined and
+    ansible_facts.services['collectionspace.service']['state'] == 'running'
 
 - name: Build the services layer
   shell: mvn clean install -DskipTests

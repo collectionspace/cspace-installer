@@ -1,0 +1,18 @@
+[Unit]
+Description=CollectionSpace - instance %i
+After=syslog.target network.target
+
+[Service]
+Type=forking
+User=collectionspace
+Group=collectionspace
+EnvironmentFile=/home/collectionspace/.config/environment.d/collectionspace.conf
+ExecStart=/opt/collectionspace/server/bin/startup.sh
+ExecStop=/opt/collectionspace/server/bin/shutdown.sh
+PIDFile=/opt/collectionspace/server/bin/tomcat.pid
+Restart=always
+RestartSec=10
+StartLimitIntervalSec=0
+
+[Install]
+WantedBy=multi-user.target

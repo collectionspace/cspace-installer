@@ -12,11 +12,29 @@
     group: collectionspace
     shell: /bin/bash
 
+- name: Create the user environment folder
+  file:
+    path: /home/collectionspace/.config/environment.d
+    state: directory
+
 - name: Set CollectionSpace user environment variables
-  blockinfile:
-    path: /home/collectionspace/.bashrc
-    block: "{{ lookup('template', 'user_env.j2') }}"
+  template:
+    src: user_env.j2
+    dest: /home/collectionspace/.config/environment.d/collectionspace.conf
     owner: collectionspace
     group: collectionspace
-    marker: "# {mark} ANSIBLE MANAGED BLOCK CSPACE ENV"
   no_log: true
+  register: cspace_env
+
+- name: Add environment to ~/.bashrc
+  lineinfile:
+    path: /home/collectionspace/.bashrc
+    regexp: "{{ item.regex }}"
+    line: "{{ item.line }}"
+    owner: collectionspace
+    group: collectionspace
+  with_items:
+    - line: set -o allexport
+      regex: ^set -o allexport
+    - line: source /home/collectionspace/.config/environment.d/collectionspace.conf
+      regex: ^source /home/collectionspace
