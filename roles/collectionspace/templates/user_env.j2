@@ -2,5 +2,5 @@
 {{ key }}="{{ value }}"
 {% endfor %}
 {% for tenant in collectionspace_tenants %}
-CSPACE_{{ tenant | upper }}_CREATE_DISABLED_OPT="false"
+CSPACE_{{ tenant.name | upper }}_CREATE_DISABLED_OPT="false"
 {% endfor %}

@@ -19,7 +19,7 @@ The password for the csadmin database user.
 The CollectionSpace environment variables. See `defaults`.
 
     collectionspace_tenants:
-        - core
+        - name: core
 
 The list of tenants that will be enabled.
 

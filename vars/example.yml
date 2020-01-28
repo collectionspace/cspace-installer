@@ -8,10 +8,10 @@ collectionspace_csadmin_password: keepmesecretplz
 
 # CollectionSpace tenants that will be enabled
 collectionspace_tenants:
-  - core
-  - fcart
-  - materials
-  - publicart
+  - name: core
+  - name: fcart
+  - name: materials
+  - name: publicart
 
 # ENV: 'production', 'staging', 'test' etc.
 # Using 'test' will disable SSL cert creation.
@@ -23,4 +23,3 @@ env: test
 ssh_allowed_ip_addresses:
   # - 0.0.0.0/0 # allow all
   - "{{ lookup('url', 'http://checkip.amazonaws.com', split_lines=False) | replace('\n', '') }}"
-
