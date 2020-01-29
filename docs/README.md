@@ -115,10 +115,13 @@ Running the playbook requires a user with `sudo` privileges:
 # by default the ssh user is the current user, and the ssh key is ~/.ssh/id_rsa
 ansible-playbook -i $HOSTNAME, playbook.yml -e @vars/deploy.yml
 
+# for a newly created cloud server running as root the first time:
+ansible-playbook -i $HOSTNAME, playbook.yml -u root -e @vars/example.yml
+
 # the user / key can be specified on the command line
 ansible-playbook -i $HOSTNAME, playbook.yml \
-  --user=admin \
-  --private-key=~/.ssh/admin \
+  --user=deploy \
+  --private-key=~/.ssh/deploy \
   --extra-vars=@vars/deploy.yml
 ```
 
@@ -134,7 +137,7 @@ ansible-playbook -i $HOSTNAME, playbook.yml --list-tags
 
 # run only the collectionspace role tasks
 ansible-playbook -i $HOSTNAME, playbook.yml \
-  --user=admin \
+  --user=deploy \
   --private-key=~/.ssh/admin \
   --extra-vars=@vars/deploy.yml \
   --tags=collectionspace

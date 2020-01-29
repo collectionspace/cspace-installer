@@ -27,6 +27,8 @@ Some minimal system configuration updates are applied, including:
 - Software packages are updated automatically
 - SSH ip addresses can be whitelisted (default: current location IP address)
 - SSH password authentication is disabled
+- SSH for root user login can be disabled (default: disabled)
+- Standard user accounts can be created (default: 'deploy')
 
 These are baseline security features that are required to facilitate
 installer development. Otherwise the installer attempts to be as

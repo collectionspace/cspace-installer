@@ -3,3 +3,5 @@
 - import_tasks: apt.yml
 - import_tasks: firewall.yml
 - import_tasks: ssh.yml
+- include_tasks: user.yml
+  loop: "{{ users | default([]) }}"

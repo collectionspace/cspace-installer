@@ -1,6 +1,7 @@
 ---
 # Testing:
-# ansible-playbook -i installer.collectionspace.org, playbook.yml -u root -e @vars/example.yml
+# ansible-playbook -i installer.collectionspace.org, playbook.yml -u root -e @vars/example.yml # 1st
+# ansible-playbook -i installer.collectionspace.org, playbook.yml -u deploy -e @vars/example.yml
 
 - hosts: all
   gather_facts: true
@@ -22,6 +23,8 @@
           "Ok! Using Ansible: {{ ansible_version.full }}"
 
     - import_tasks: includes/bootstrap.yml
+      tags:
+        - bootstrap
 
   roles:
     - role: postgresql
