@@ -5,4 +5,5 @@
 *.tfstate
 roles/*
 !roles/collectionspace/
-vars/local.yml
+vars/*
+!vars/example.yml

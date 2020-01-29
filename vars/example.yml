@@ -6,12 +6,13 @@ certbot_admin_email: no-reply@example.com
 # Password for the csadmin database user (be sure to keep this SECRET!)
 collectionspace_csadmin_password: keepmesecretplz
 
-# CollectionSpace tenants that will be enabled
+# Setting this to true will trigger build steps
+# irrespective of other tasks status
+collectionspace_force_build: False
+
+# CollectionSpace tenants that will be enabled and accessible online
 collectionspace_tenants:
   - name: core
-  - name: fcart
-  - name: materials
-  - name: publicart
 
 # ENV: 'production', 'staging', 'test' etc.
 # Using 'test' will disable SSL cert creation.

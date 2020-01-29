@@ -18,10 +18,14 @@ The password for the csadmin database user.
 
 The CollectionSpace environment variables. See `defaults`.
 
+    collectionspace_force_build: False
+
+Run build steps regardless of conditional task status.
+
     collectionspace_tenants:
         - name: core
 
-The list of tenants that will be enabled.
+The list of tenants that will be enabled **and** accessible via the web interface.
 
     collectionspace_tomcat_version: 'apache-tomcat-8.5.40'
 

@@ -5,7 +5,7 @@
     msg: Building collectionspace (this may take a while) ...
 
 - name: Stop CollectionSpace before build
-  systemd:
+  service:
     name: collectionspace
     state: stopped
   when: >
@@ -16,13 +16,19 @@
   shell: mvn clean install -DskipTests
   args:
     chdir: /opt/collectionspace/services
+  become: true
+  become_user: collectionspace
 
 - name: Build the application layer
   shell: mvn clean install -DskipTests
   args:
     chdir: /opt/collectionspace/application
+  become: true
+  become_user: collectionspace
 
 - name: Run the services layer ant tasks
   shell: ant undeploy deploy create_db import
   args:
     chdir: /opt/collectionspace/services
+  become: true
+  become_user: collectionspace

@@ -21,9 +21,6 @@
         success_msg: >
           "Ok! Using Ansible: {{ ansible_version.full }}"
 
-    - name: get service facts
-      service_facts:
-
     - import_tasks: includes/bootstrap.yml
 
   roles:

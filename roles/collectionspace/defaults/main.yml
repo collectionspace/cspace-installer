@@ -7,6 +7,8 @@ collectionspace_environment:
   "CATALINA_HOME": "/opt/collectionspace/server"
   "CATALINA_OPTS": "-Xmx{{ collectionspace_allocated_ram }} -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Duser.timezone=UTC"
   "CATALINA_PID": "/opt/collectionspace/server/bin/tomcat.pid"
+  # Enable Core by default, we do not recommend changing this
+  "CSPACE_CORE_CREATE_DISABLED_OPT": "false"
   "CSPACE_INSTANCE_ID": "_default"
   "CSPACE_JEESERVER_HOME": "/opt/collectionspace/server"
   "DB_CSADMIN_PASSWORD": "{{ collectionspace_csadmin_password }}"
@@ -18,6 +20,7 @@ collectionspace_environment:
   "JAVA_HOME": "/usr/lib/jvm/java-8-openjdk-amd64/"
   "JEE_PORT": "8180"
   "MAVEN_OPTS": "-Xmx{{ collectionspace_allocated_ram }}"
+collectionspace_force_build: False
 collectionspace_tenants:
   - name: core
 collectionspace_tomcat_version: apache-tomcat-8.5.40

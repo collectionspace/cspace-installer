@@ -1,10 +1,16 @@
 ---
 
+- name: get service facts
+  service_facts:
+
 - import_tasks: user.yml
 - import_tasks: setup.yml
 - import_tasks: download.yml
 - import_tasks: build.yml
-  become: true
-  become_user: collectionspace
-  when: cspace_env.changed or server.changed or apps.changed
+  environment: "{{ collectionspace_environment }}"
+  when: >
+    collectionspace_force_build or
+    cspace_env.changed or
+    server.changed or
+    apps.changed
 - import_tasks: service.yml

@@ -1,6 +1,6 @@
 {% for key, value in collectionspace_environment.items() %}
 {{ key }}="{{ value }}"
 {% endfor %}
-{% for tenant in collectionspace_tenants %}
+{% for tenant in collectionspace_tenants | rejectattr('name', 'equalto', 'core') %}
 CSPACE_{{ tenant.name | upper }}_CREATE_DISABLED_OPT="false"
 {% endfor %}
