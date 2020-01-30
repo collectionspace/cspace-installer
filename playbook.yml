@@ -34,7 +34,7 @@
     - role: collectionspace
       tags: ['collectionspace', 'cspace']
     - role: certbot
-      tags: ['certs']
+      tags: ['certbot', 'certs']
     - role: nginx
       tags: ['nginx', 'web']
 

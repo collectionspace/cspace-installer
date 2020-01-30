@@ -1,7 +1,12 @@
 ---
 
 # Email address to receive certbot notifications
-certbot_admin_email: no-reply@example.com
+certbot_admin_email: no-reply@collectionspace.org
+
+# SSL certs: uncomment this variable and leave it as an empty list
+# to prevent SSL cert generation. This is generally only recommended
+# for testing with IP addresses (no DNS configured)
+# certbot_certs: []
 
 # Password for the csadmin database user (update this and keep it SECRET!)
 collectionspace_csadmin_password: keepmesecretplz
@@ -20,10 +25,6 @@ collectionspace_tenants:
 # Warning: with permit_root_login = "no" ensure there is a user
 # account available on the system for SSH access (see `users`)
 permit_root_login: "no"
-
-# ENV: 'production', 'staging', 'test' etc.
-# Using 'test' will disable SSL cert creation.
-env: test
 
 # List of ip addresses for SSH
 # Example uses lookup current location ip address.

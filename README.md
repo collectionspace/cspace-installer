@@ -7,8 +7,12 @@ for setting up [CollectionSpace](https://www.collectionspace.org/) on a
 remote [Ubuntu](https://ubuntu.com/) server consistent with the [official
 documentation](https://collectionspace.atlassian.net/wiki/spaces/DOC/pages/701465498/Installing+on+Ubuntu+LTS).
 
-All of the components in a CollectionSpace system will be installed onto
-the target machine:
+For a turn-key, production ready deployment there are just two requirements:
+
+- An Ubuntu server reachable via SSH using key authentication
+- DNS configured to access the server by hostname
+
+All of the components in a CollectionSpace system will be installed:
 
 - CollectionSpace application
 - CollectionSpace public gateway

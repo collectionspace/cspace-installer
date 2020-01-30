@@ -58,13 +58,17 @@ for the server. For example:
 
 - cspace.example.org -> A record -> $PUBLIC_IP_ADDRESS_OF_SERVER
 
-Then you will access ColletionSpace at: https://cspace.example.org
+Then access CollectionSpace at:
 
-The installer uses [Lets Encrypt](https://letsencrypt.org/) to generate
-an SSL certificate to protect the publicly accessible site. For testing
-this can be disabled by setting the Ansible environment to `test` (more
-details below). You can then access CollectionSpace by domain or IP address
-without SSL.
+- http://cspace.example.org # without SSL
+- https://cspace.example.org # with SSL
+
+By default the installer will attempt to generate an SSL certificate
+using [Lets Encrypt](https://letsencrypt.org/) to protect the publicly
+accessible site. If you have not added DNS for the server then you
+will need to disable this default behavior (details below).
+
+**SSL is very strongly recommended for a production system.**
 
 ## Verify SSH connection
 
@@ -142,3 +146,15 @@ ansible-playbook -i $HOSTNAME, playbook.yml \
   --extra-vars=@vars/deploy.yml \
   --tags=collectionspace
 ```
+
+It may take one hour or more for the playbook to successfully run
+to completion the first time (it depends on many factors, such as
+allocated server resources, network performance etc.). Subsequent runs
+(which can be done to maintain installer configuration) should be
+much faster.
+
+It's possible for the installer to get interrupted and fail part way
+through the process. Should that happen simply re-run the installer
+to determine whether it is able to correct any issues and complete
+the deployment. If not then you can reach out with questions on the
+[CollectionSpace mailing list](#).

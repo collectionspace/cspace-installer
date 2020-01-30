@@ -2,7 +2,7 @@ upstream collectionspace {
 	server localhost:8180;
 }
 
-{% if env != 'test' %}
+{% if certbot_certs | length > 0 %}
 server {
 	listen 80;
 	listen [::]:80;
@@ -14,8 +14,8 @@ server {
 server {
 	server_name {{ inventory_hostname }};
 	charset utf-8;
-{% if env != 'test' %}
-	isten 443 ssl;
+{% if certbot_certs | length > 0 %}
+	listen 443 ssl;
 	listen [::]:443 ssl;
 	ssl_certificate     /etc/letsencrypt/live/{{ inventory_hostname }}/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/{{ inventory_hostname }}/privkey.pem;
