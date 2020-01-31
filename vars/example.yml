@@ -32,14 +32,15 @@ ssh_allowed_ip_addresses:
   # - 0.0.0.0/0 # allow all
   - "{{ lookup('url', 'http://checkip.amazonaws.com', split_lines=False) | replace('\n', '') }}"
 
-# List of users to create on the server
-# Remove the `users` variable or comment out these lines to disable user creation,
-# however disabling users with permit_root_login = "no" can prevent SSH access so
-# if you are not creating users with the installer ensure that at least 1 user
-# account exists for SSH access on the server
+# List of users to create on the server. Remove the `users` variable or
+# comment out these lines to disable user creation, however disabling
+# users with permit_root_login = "no" can prevent SSH access so if you
+# are not creating users with the installer ensure that at least 1 user
+# account exists for SSH access on the server and / or set
+# permit_root_login = "prohibit-password". Note: users created this way
+# have passwordless sudo privileges (i.e. it's a root like account)
 users:
   - name: deploy
     shell: bin/bash
-    password: "{{ 'keepmesecretplz' | password_hash('sha512', 'salty')}}" # update this and keep it SECRET!
     # Example resolves to: /path/to/$USERNAME/.ssh/id_rsa.pub on local machine
     public_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
