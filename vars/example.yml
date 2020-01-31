@@ -15,9 +15,8 @@ collectionspace_csadmin_password: keepmesecretplz
 # irrespective of other tasks status
 collectionspace_force_build: False
 
-# CollectionSpace tenants that will be enabled and accessible online
-collectionspace_tenants:
-  - name: core
+# The CollectionSpace tenant that will be enabled and accessible online
+collectionspace_tenant: core
 
 # Mode for root user login, options:
 # - "no" # disable root user ssh. Note: the quotes are required

@@ -46,7 +46,7 @@ server {
 	proxy_set_header        X-Real-IP          $remote_addr;
 
 	location / {
-		return 301 http://{{ inventory_hostname }}/cspace-services/systeminfo;
+		return 301 http://{{ inventory_hostname }}/cspace/{{ collectionspace_tenant }}/login;
 	}
 	location /cspace-services {
 		proxy_pass http://collectionspace;
@@ -54,9 +54,7 @@ server {
 	location /cspace-ui/ {
 		proxy_pass http://collectionspace;
 	}
-{% for tenant in collectionspace_tenants %}
-	location /cspace/{{ tenant.name }}/ {
+	location /cspace/{{ collectionspace_tenant }}/ {
 		proxy_pass http://collectionspace;
 	}
-{% endfor %}
 }

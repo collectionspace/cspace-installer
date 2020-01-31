@@ -6,7 +6,7 @@ An Ansible Role that installs CollectionSpace on Ubuntu.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    collectionspace_allocated_ram: "1524m"
+    collectionspace_allocated_ram: '1524m'
 
 The amount of memory allocated to CollectionSpace (can use gigabytes i.e. "2g").
 
@@ -22,8 +22,7 @@ The CollectionSpace environment variables. See `defaults`.
 
 Run build steps regardless of conditional task status.
 
-    collectionspace_tenants:
-        - name: core
+    collectionspace_tenant: 'core'
 
 The list of tenants that will be enabled **and** accessible via the web interface.
 

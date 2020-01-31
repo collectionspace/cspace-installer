@@ -21,7 +21,6 @@ collectionspace_environment:
   "JEE_PORT": "8180"
   "MAVEN_OPTS": "-Xmx{{ collectionspace_allocated_ram }}"
 collectionspace_force_build: False
-collectionspace_tenants:
-  - name: core
+collectionspace_tenant: core
 collectionspace_tomcat_version: apache-tomcat-8.5.40
 collectionspace_version: '5.2'

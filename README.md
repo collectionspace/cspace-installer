@@ -20,11 +20,6 @@ All of the components in a CollectionSpace system will be installed:
 - [Nginx](https://www.nginx.com/) web proxy
 - [Postgres](https://www.postgresql.org/) database server
 
-All of the standard CollectionSpace tenants can be enabled via a
-single configuration file and by using one (or more) of the provided
-tenants your CollectionSpace system will be on the recommended and
-supported upgrade path.
-
 Some minimal system configuration updates are applied, including:
 
 - Firewall is enabled (default deny policy) with exceptions for HTTP & SSH
