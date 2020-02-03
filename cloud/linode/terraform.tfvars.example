@@ -1,3 +1,3 @@
 # REQUIRED (see README for all options)
-root_pass ="YOUR_ROOT_PASSWORD"
+root_pass = "YOUR_ROOT_PASSWORD"
 token = "YOUR_LINODE_API_TOKEN"
