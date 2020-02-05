@@ -1,24 +1,10 @@
-## Setup
-
-If you don't have a server to use currently there are
-[Terraform](https://www.terraform.io/) configurations for creating a
-server on these platforms:
-
-- [AWS](https://aws.amazon.com/) using [Lightsail](https://aws.amazon.com/lightsail/)
-- [Digital Ocean](https://www.digitalocean.com/)
-- [Linode](https://www.linode.com/)
-
-The installer is tested on Mac OS and Ubuntu Linux. If you're on Windows
-you can run the installer using [WSL](https://docs.microsoft.com/en-us/windows/wsl/about)
-(Windows Subsystem for Linux).
-
 ## Requirements
 
 On your local machine install:
 
 - Terraform v0.12+ (optional, only if you need to create a server)
 
-On the server you will need:
+On the server you will need (installation instructions provided below):
 
 - Ansible v2.9+
 - Ubuntu 18.04 LTS
@@ -82,16 +68,16 @@ You may receive a `passphrase` prompt if your SSH key has one, but
 you should not receive a `password` prompt if key authentication is
 being used.
 
-## Download playbook and setup Ansible
-
-All of these steps should be performed on the server:
+## Download playbook and setup Ansible (on the server)
 
 ```bash
+# install ansible and other requirements
 sudo apt update
 sudo apt install git python3 python3-pip software-properties-common
 sudo apt-add-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 
+# download and setup ansible playbook
 git clone https://github.com/collectionspace/cspace-installer.git
 cd cspace-installer
 ansible-galaxy install -r requirements.yml --force
@@ -108,7 +94,7 @@ Update the config following the instructions in file. Be sure to create
 a secure backup of this file as you'll need it every time the playbook
 is run.
 
-## Running Ansible
+## Running Ansible (on the server)
 
 Running the playbook requires a user with `sudo` privileges:
 
@@ -123,14 +109,14 @@ ansible-playbook --connection=local -i localhost, playbook.yml --list-tags
 
 # run only the collectionspace role tasks
 ansible-playbook --connection=local -i localhost, playbook.yml \
+  -e @vars/deploy.yml \
   --tags=collectionspace
 ```
 
-It may take one hour or more for the playbook to successfully run
-to completion the first time (it depends on many factors, such as
-allocated server resources, network performance etc.). Subsequent runs
-(which can be done to maintain installer configuration) should be
-much faster.
+It may take one hour or more for the playbook to run to completion
+the first time (it depends on many factors, such as allocated server
+resources, network performance etc.). Subsequent runs (which can be
+done to maintain installer configuration) should be much faster.
 
 It's possible for the installer to get interrupted and fail part way
 through the process. Should that happen simply re-run the installer

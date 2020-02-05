@@ -29,7 +29,6 @@ collectionspace_tenant: core
 permit_root_login: prohibit-password
 
 # List of ip addresses for SSH
-# Example uses lookup current location ip address.
 # We recommend using an explicit list of known and trusted IP addresses
 ssh_allowed_ip_addresses:
   - 0.0.0.0/0 # allow all
