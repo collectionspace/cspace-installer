@@ -32,3 +32,9 @@
     chdir: /opt/collectionspace/services
   become: true
   become_user: collectionspace
+
+- name: Write the bootstrap file after initial build
+  copy:
+    content: "{{ ansible_date_time.epoch }}"
+    dest: /opt/collectionspace/bootstrap
+  when: not bootstrap.stat.exists
