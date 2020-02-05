@@ -13,21 +13,24 @@
     ansible_facts.services['collectionspace.service']['state'] == 'running'
 
 - name: Build the services layer
-  shell: mvn clean install -DskipTests
+  shell:
+    cmd: mvn clean install -DskipTests
   args:
     chdir: /opt/collectionspace/services
   become: true
   become_user: collectionspace
 
 - name: Build the application layer
-  shell: mvn clean install -DskipTests
+  shell:
+    cmd: mvn clean install -DskipTests
   args:
     chdir: /opt/collectionspace/application
   become: true
   become_user: collectionspace
 
 - name: Run the services layer ant tasks
-  shell: ant undeploy deploy create_db import
+  shell:
+    cmd: ant undeploy deploy create_db import
   args:
     chdir: /opt/collectionspace/services
   become: true
