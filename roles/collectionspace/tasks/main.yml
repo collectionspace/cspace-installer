@@ -3,6 +3,11 @@
 - name: Get service facts
   service_facts:
 
+- name: Check service was bootstrapped
+  stat:
+    path: /etc/systemd/system/collectionspace.service
+  register: service
+
 - import_tasks: user.yml
 - import_tasks: setup.yml
 - import_tasks: download.yml
@@ -10,6 +15,7 @@
   environment: "{{ collectionspace_environment }}"
   when: >
     collectionspace_force_build or
+    not service.stat.exists or
     cspace_env.changed or
     server.changed or
     apps.changed

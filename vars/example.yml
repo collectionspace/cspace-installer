@@ -15,6 +15,9 @@ collectionspace_csadmin_password: keepmesecretplz
 # irrespective of other tasks status
 collectionspace_force_build: False
 
+# Domain name of the server added to DNS
+collectionspace_domain: installer.collectionspace.org
+
 # The CollectionSpace tenant that will be enabled and accessible online
 collectionspace_tenant: core
 

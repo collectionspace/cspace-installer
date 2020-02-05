@@ -9,7 +9,7 @@ certbot_auto_renew_user: root
 certbot_certs:
   - email: "{{ certbot_admin_email }}"
     domains:
-      - "{{ inventory_hostname }}"
+      - "{{ collectionspace_domain }}"
 certbot_create_if_missing: yes
 certbot_install_from_source: yes
 

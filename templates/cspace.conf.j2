@@ -6,19 +6,19 @@ upstream collectionspace {
 server {
 	listen 80;
 	listen [::]:80;
-	server_name {{ inventory_hostname }};
-	return 301 https://{{ inventory_hostname }}$request_uri;
+	server_name {{ collectionspace_domain }};
+	return 301 https://{{ collectionspace_domain }}$request_uri;
 }
 {% endif %}
 
 server {
-	server_name {{ inventory_hostname }};
+	server_name {{ collectionspace_domain }};
 	charset utf-8;
 {% if certbot_certs | length > 0 %}
 	listen 443 ssl;
 	listen [::]:443 ssl;
-	ssl_certificate     /etc/letsencrypt/live/{{ inventory_hostname }}/fullchain.pem;
-	ssl_certificate_key /etc/letsencrypt/live/{{ inventory_hostname }}/privkey.pem;
+	ssl_certificate     /etc/letsencrypt/live/{{ collectionspace_domain }}/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/{{ collectionspace_domain }}/privkey.pem;
 	ssl_protocols       TLSv1.1 TLSv1.2;
 	ssl_ciphers         HIGH:!aNULL:!MD5;
 {% else %}
@@ -46,7 +46,7 @@ server {
 	proxy_set_header        X-Real-IP          $remote_addr;
 
 	location / {
-		return 301 http://{{ inventory_hostname }}/cspace/{{ collectionspace_tenant }}/login;
+		return 301 http://{{ collectionspace_domain }}/cspace/{{ collectionspace_tenant }}/login;
 	}
 	location /cspace-services {
 		proxy_pass http://collectionspace;
