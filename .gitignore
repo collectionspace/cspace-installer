@@ -2,7 +2,7 @@
 *.retry
 .terraform/
 *.tfvars
-*.tfstate
+*.tfstate*
 roles/*
 !roles/collectionspace/
 vars/*

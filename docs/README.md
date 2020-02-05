@@ -73,9 +73,9 @@ being used.
 ```bash
 # install ansible and other requirements
 sudo apt update
-sudo apt install git python3 python3-pip software-properties-common
+sudo apt install --yes git python3 python3-pip software-properties-common
 sudo apt-add-repository --yes --update ppa:ansible/ansible
-sudo apt install ansible
+sudo apt install --yes ansible
 
 # download and setup ansible playbook
 git clone https://github.com/collectionspace/cspace-installer.git
