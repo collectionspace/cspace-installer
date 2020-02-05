@@ -18,6 +18,8 @@
     cd /opt/collectionspace/application && mvn clean install -DskipTests && \
     cd /opt/collectionspace/services && ant undeploy deploy create_db import && \
     touch /opt/collectionspace/build/build.{{ ansible_date_time.epoch }}
+  args:
+    executable: /bin/bash
   async: 7200
   poll: 0
   become: true
