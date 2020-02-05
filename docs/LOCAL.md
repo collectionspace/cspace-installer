@@ -2,8 +2,6 @@
 
 Download and [install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installation-guide) on your local machine.
 
-You do not have to SSH to the server when running Ansible locally.
-
 Add `ServerAliveInterval 120` to your `~/.ssh/config` to prevent
 potential SSH timeouts during build steps. If you're on Windows
 you can install Ansible using the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about).
