@@ -16,20 +16,14 @@ you can run the installer using [WSL](https://docs.microsoft.com/en-us/windows/w
 
 On your local machine install:
 
-- Ansible v2.9+
-- Python 3.6+ (required by Ansible, probably already installed)
 - Terraform v0.12+ (optional, only if you need to create a server)
 
-*If you're on Windows install the requirements using the WSL shell.*
+On the server you will need:
 
-On a self hosted / managed server you will need:
-
+- Ansible v2.9+
 - Ubuntu 18.04 LTS
 - Python 3.6+
 - SSH enabled and a user with an authorized SSH key
-
-Servers created by Terraform will have these requirements
-pre-installed.
 
 Minimum hardware requirements are:
 
@@ -90,13 +84,16 @@ being used.
 
 ## Download playbook and setup Ansible
 
-Begin by [downloading the playbook](#) and unzipping it, or cloning it if
-using [git](https://git-scm.com/).
-
-From the playbook directory pull the Ansible roles (libraries):
+All of these steps should be performed on the server:
 
 ```bash
-cd /path/to/cspace-installer
+sudo apt update
+sudo apt install git python3 python3-pip software-properties-common
+sudo apt-add-repository --yes --update ppa:ansible/ansible
+sudo apt install ansible
+
+git clone https://github.com/collectionspace/cspace-installer.git
+cd cspace-installer
 ansible-galaxy install -r requirements.yml --force
 ```
 
@@ -116,34 +113,16 @@ is run.
 Running the playbook requires a user with `sudo` privileges:
 
 ```bash
-# by default the ssh user is the current user, and the ssh key is ~/.ssh/id_rsa
-ansible-playbook -i $HOSTNAME, playbook.yml -e @vars/deploy.yml
-
-# for a newly created cloud server running as root the first time:
-ansible-playbook -i $HOSTNAME, playbook.yml -u root -e @vars/example.yml
-
-# the user / key can be specified on the command line
-ansible-playbook -i $HOSTNAME, playbook.yml \
-  --user=deploy \
-  --private-key=~/.ssh/deploy \
-  --extra-vars=@vars/deploy.yml
+ansible-playbook --connection=local -i localhost, playbook.yml -e @vars/deploy.yml
 ```
-
-**Important: the "," after $HOSTNAME is required!**
-
-See the [ansible-playbook](https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html)
-docs for all of the CLI connection options.
 
 You can use `tags` to limit the range of tasks that are run:
 
 ```bash
-ansible-playbook -i $HOSTNAME, playbook.yml --list-tags
+ansible-playbook --connection=local -i localhost, playbook.yml --list-tags
 
 # run only the collectionspace role tasks
-ansible-playbook -i $HOSTNAME, playbook.yml \
-  --user=deploy \
-  --private-key=~/.ssh/admin \
-  --extra-vars=@vars/deploy.yml \
+ansible-playbook --connection=local -i localhost, playbook.yml \
   --tags=collectionspace
 ```
 

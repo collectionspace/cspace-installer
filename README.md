@@ -3,13 +3,13 @@
 **Work in progress: targeting v5.3 (03/2020) for v1.0 release**
 
 The installer provides an [Ansible](https://www.ansible.com/) playbook
-for setting up [CollectionSpace](https://www.collectionspace.org/) on a
-remote [Ubuntu](https://ubuntu.com/) server consistent with the [official
+for setting up [CollectionSpace](https://www.collectionspace.org/) on an
+[Ubuntu](https://ubuntu.com/) server consistent with the [official
 documentation](https://collectionspace.atlassian.net/wiki/spaces/DOC/pages/701465498/Installing+on+Ubuntu+LTS).
 
 For a turn-key, production ready deployment there are just two requirements:
 
-- An Ubuntu server reachable via SSH using key authentication
+- An Ubuntu server reachable via SSH
 - DNS configured to access the server by hostname
 
 All of the components in a CollectionSpace system will be installed:
@@ -24,10 +24,9 @@ Some minimal system configuration updates are applied, including:
 
 - Firewall is enabled (default deny policy) with exceptions for HTTP & SSH
 - Software packages are updated automatically
-- SSH ip addresses can be whitelisted (default: current location IP address)
+- SSH ip addresses can be whitelisted (default: all IP addresses)
 - SSH password authentication is disabled
-- SSH for root user login can be disabled (default: disabled)
-- Standard user accounts can be created (default: 'deploy')
+- SSH for root user login can be disabled (default: prohibit-password)
 
 These are baseline security features that are required to facilitate
 installer development. Otherwise the installer attempts to be as
