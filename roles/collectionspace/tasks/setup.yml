@@ -16,7 +16,7 @@
 
 - name: Create CollectionSpace directory
   file:
-    path: /opt/collectionspace
+    path: /opt/collectionspace/build
     owner: collectionspace
     group: collectionspace
     state: directory

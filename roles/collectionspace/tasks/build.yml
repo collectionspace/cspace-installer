@@ -12,32 +12,18 @@
     ansible_facts.services['collectionspace.service'] is defined and
     ansible_facts.services['collectionspace.service']['state'] == 'running'
 
-- name: Build the services layer
-  shell:
-    cmd: mvn clean install -DskipTests
-  args:
-    chdir: /opt/collectionspace/services
+- name: Build CollectionSpace
+  shell: >
+    cd /opt/collectionspace/services && mvn clean install -DskipTests && \
+    cd /opt/collectionspace/application && mvn clean install -DskipTests && \
+    cd /opt/collectionspace/services && ant undeploy deploy create_db import && \
+    touch /opt/collectionspace/build/build.{{ ansible_date_time.epoch }}
+  async: 7200
+  poll: 0
   become: true
   become_user: collectionspace
 
-- name: Build the application layer
-  shell:
-    cmd: mvn clean install -DskipTests
-  args:
-    chdir: /opt/collectionspace/application
-  become: true
-  become_user: collectionspace
-
-- name: Run the services layer ant tasks
-  shell:
-    cmd: ant undeploy deploy create_db import
-  args:
-    chdir: /opt/collectionspace/services
-  become: true
-  become_user: collectionspace
-
-- name: Write the bootstrap file after initial build
-  copy:
-    content: "{{ ansible_date_time.epoch }}"
-    dest: /opt/collectionspace/bootstrap
-  when: not bootstrap.stat.exists
+- name: "Wait for CollectionSpace build (build.{{ ansible_date_time.epoch }}"
+  wait_for:
+    path: "/opt/collectionspace/build/build.{{ ansible_date_time.epoch }}"
+    timeout: 7200

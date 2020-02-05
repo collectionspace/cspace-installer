@@ -3,11 +3,6 @@
 - name: Get service facts
   service_facts:
 
-- name: Check bootstrapped
-  stat:
-    path: /opt/collectionspace/bootstrap
-  register: bootstrap
-
 - import_tasks: user.yml
 - import_tasks: setup.yml
 - import_tasks: download.yml
@@ -15,7 +10,6 @@
   environment: "{{ collectionspace_environment }}"
   when: >
     collectionspace_force_build or
-    not bootstrap.stat.exists or
     cspace_env.changed or
     server.changed or
     apps.changed
