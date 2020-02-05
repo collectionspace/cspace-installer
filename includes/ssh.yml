@@ -1,11 +1,12 @@
 ---
 
-- name: Set root login mode
+- name: Apply SSH config
   lineinfile:
     path: /etc/ssh/sshd_config
     state: present
-    regexp: "^PermitRootLogin"
-    line: "PermitRootLogin {{ permit_root_login }}"
+    regexp: "^{{ item.key }}"
+    line: "{{ item.key }} {{ item.value }}"
+  loop: "{{ ssh_config }}"
   notify:
     - restart ssh
 

@@ -29,3 +29,14 @@ postgresql_users:
     password: "{{ collectionspace_csadmin_password }}"
     role_attr_flags: 'SUPERUSER,INHERIT,NOCREATEDB,NOCREATEROLE,NOREPLICATION'
     state: present
+
+# SSH
+ssh_config:
+  - key: PermitRootLogin
+    value: "{{ permit_root_login }}"
+  - key: PasswordAuthentication
+    value: 'no'
+  - key: ClientAliveInterval
+    value: '120'
+  - key: ClientAliveCountMax
+    value: '720'
