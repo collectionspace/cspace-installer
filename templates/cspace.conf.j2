@@ -12,14 +12,14 @@ server {
 {% endif %}
 
 server {
-	server_name {{ collectionspace_domain }};
+	server_name _;
 	charset utf-8;
 {% if certbot_certs | length > 0 %}
 	listen 443 ssl;
 	listen [::]:443 ssl;
 	ssl_certificate     /etc/letsencrypt/live/{{ collectionspace_domain }}/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/{{ collectionspace_domain }}/privkey.pem;
-	ssl_protocols       TLSv1.1 TLSv1.2;
+	ssl_protocols       TLSv1.2;
 	ssl_ciphers         HIGH:!aNULL:!MD5;
 {% else %}
 	listen 80;
