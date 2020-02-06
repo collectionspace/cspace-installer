@@ -16,6 +16,7 @@ collectionspace_csadmin_password: keepmesecretplz
 collectionspace_force_build: False
 
 # Domain name of the server added to DNS
+# used by certbot to generate an SSL cert
 collectionspace_domain: installer.collectionspace.org
 
 # The CollectionSpace tenant that will be enabled and accessible online

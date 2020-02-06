@@ -84,7 +84,12 @@ sudo apt install --yes ansible
 ```
 
 **Important:** Add `ServerAliveInterval 120` to your `~/.ssh/config` to prevent
-potential SSH timeouts during build steps.
+potential SSH timeouts during build steps. A minimal SSH config would look like:
+
+```txt
+Host *
+ServerAliveInterval 120
+```
 
 Download the playbook to your local machine:
 

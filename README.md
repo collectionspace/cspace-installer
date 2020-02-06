@@ -45,10 +45,14 @@ See the [documentation](docs/README.md) for full instructions.
 Create server with root key access, then:
 
 ```bash
-cp vars/example.yml vars/deploy.yml # update values as needed
-DOMAIN=installer.collectionspace.org
-ansible-playbook -i $DOMAIN, security.yml -u root -e @vars/deploy.yml
-ansible-playbook -i $DOMAIN, collectionspace.yml -u deploy -e @vars/deploy.yml
+cp vars/example.yml vars/deploy.yml
+# update values as needed, uncomment:
+# certbot_certs: []
+# if domain not added to DNS or you're using IP address
+
+DOMAIN_OR_IP=installer.collectionspace.org
+ansible-playbook -i $DOMAIN_OR_IP, security.yml -u root -e @vars/deploy.yml
+ansible-playbook -i $DOMAIN_OR_IP, collectionspace.yml -u deploy -e @vars/deploy.yml
 ```
 
 ## License
