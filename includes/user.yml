@@ -1,0 +1,18 @@
+---
+
+- name: Create user account
+  user:
+    name: "{{ item.name }}"
+    shell: /bin/bash
+    password: "{{ item.name | password_hash('sha512', 'salty')}}"
+
+- name: Add user to sudoers
+  copy:
+    dest: "/etc/sudoers.d/{{ item.name }}"
+    content: "{{ item.name }} ALL=(ALL) NOPASSWD: ALL"
+
+- name: Add user SSH authorized key
+  authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ item.public_key }}"
+    state: present

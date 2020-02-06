@@ -20,27 +20,36 @@ All of the components in a CollectionSpace system will be installed:
 - [Nginx](https://www.nginx.com/) web proxy
 - [Postgres](https://www.postgresql.org/) database server
 
-Some minimal system configuration updates are applied, including:
+Some minimal system configuration updates can be applied, including:
 
-- Firewall is enabled (default deny policy) with exceptions for HTTP & SSH
+- Enable firewall (default deny policy) with exceptions for HTTP & SSH
 - Software packages are updated automatically
-- SSH ip addresses can be whitelisted (default: all IP addresses)
+- SSH ip addresses can be whitelisted
 - SSH password authentication is disabled
-- SSH for root user login can be disabled (default: prohibit-password)
+- SSH for root user login can be disabled
 
-These are baseline security features that are required to facilitate
-installer development. Otherwise the installer attempts to be as
-unopinionated as possible on the target machine so your preferences for
-tools like backups, monitoring, user management etc. can be decided and
-applied separately.
+These features are optional but highly recommended. If you do not use
+these features of the installer we strongly advise hardening and
+securing your server before running the installer.
 
-We strongly advise starting with a newly created server and a freshly
+We recommend starting with a newly created server and a freshly
 installed OS as a buildup to a production deployment. As you become
 familiar with the installation process and CollectionSpace you may want
 to wipe and reload the Operating System a few times before settling on
 a final configuration / setup.
 
 See the [documentation](docs/README.md) for full instructions.
+
+## Developer Quickstart
+
+Create server with root key access, then:
+
+```bash
+cp vars/example.yml vars/deploy.yml # update values as needed
+DOMAIN=installer.collectionspace.org
+ansible-playbook -i $DOMAIN, security.yml -u root -e @vars/deploy.yml
+ansible-playbook -i $DOMAIN, collectionspace.yml -u deploy -e @vars/deploy.yml
+```
 
 ## License
 

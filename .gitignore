@@ -7,3 +7,4 @@ roles/*
 !roles/collectionspace/
 vars/*
 !vars/example.yml
+!vars/security.yml

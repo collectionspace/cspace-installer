@@ -1,7 +1,4 @@
 ---
-# Testing:
-# ansible-playbook -i installer.collectionspace.org, playbook.yml -u root -e @vars/example.yml
-# ansible-playbook --connection=local -i localhost, playbook.yml -e @vars/example.yml
 
 - hosts: all
   gather_facts: true
@@ -21,10 +18,6 @@
           "Ansible {{ ansible_version.full }} must be at least version: {{ ansible_min_version }}"
         success_msg: >
           "Ok! Using Ansible: {{ ansible_version.full }}"
-
-    - import_tasks: includes/bootstrap.yml
-      tags:
-        - bootstrap
 
   roles:
     - role: postgresql

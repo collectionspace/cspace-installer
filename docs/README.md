@@ -2,13 +2,12 @@
 
 On your local machine install:
 
+- Ansible 2.9+
 - Terraform v0.12+ (optional, only if you need to create a server)
 
-On the server you will need (installation instructions provided below):
+On the server you will need:
 
-- Ansible v2.9+
 - Ubuntu 18.04 LTS
-- Python 3.6+
 - SSH enabled and a user with an authorized SSH key
 
 Minimum hardware requirements are:
@@ -68,15 +67,57 @@ You may receive a `passphrase` prompt if your SSH key has one, but
 you should not receive a `password` prompt if key authentication is
 being used.
 
-## Choose where to run Ansible
+## Setup Ansible
 
-You can run the playbook in two ways:
+Download and [install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installation-guide) on your local machine.
+If you're on Windows you can install Ansible using the
+[Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/about).
 
-1. [On the server](SERVER.md)
-2. [From your local machine](LOCAL.md)
+Here are the recommended steps for installing Ansible on Ubuntu / WSL:
 
-We generally recommend the first option unless you are already
-familiar with Ansible and configuration management tooling.
+```bash
+# install ansible and other requirements
+sudo apt update
+sudo apt install --yes git python3 python3-pip software-properties-common
+sudo apt-add-repository --yes --update ppa:ansible/ansible
+sudo apt install --yes ansible
+```
+
+**Important:** Add `ServerAliveInterval 120` to your `~/.ssh/config` to prevent
+potential SSH timeouts during build steps.
+
+Download the playbook to your local machine:
+
+```bash
+# download and setup ansible playbook
+git clone https://github.com/collectionspace/cspace-installer.git
+cd cspace-installer
+ansible-galaxy install -r requirements.yml --force
+```
+
+## Running Ansible
+
+For Ansible to setup CollectionSpace on your server you will need to
+create a variables file:
+
+```bash
+cp vars/example.yml vars/deploy.yml
+```
+
+Update the config following the instructions in file. Be sure to create
+a secure backup of this file as you'll need it every time the playbook
+is run.
+
+```bash
+DOMAIN=installer.collectionspace.org
+USER=root
+
+# only run this if you want to apply security configuration / updates
+ansible-playbook -i $DOMAIN, security.yml -u $USER -e @vars/deploy.yml
+
+# install collectionspace and dependencies
+ansible-playbook -i $DOMAIN, collectionspace.yml -u $USER -e @vars/deploy.yml
+```
 
 ## Progress summary
 
