@@ -32,10 +32,11 @@ These features are optional but highly recommended. If you do not use
 these features of the installer we strongly advise hardening and
 securing your server before running the installer.
 
-We recommend starting with a newly created as a buildup to a production
-deployment. As you become familiar with the installation process and
-CollectionSpace you may want to wipe and reload the Operating System a
-few times before settling on a final configuration / setup.
+We recommend starting with a newly created server as a buildup to a
+production deployment. As you become familiar with the installation
+process and CollectionSpace you may want to wipe and reload the
+Operating System a few times before settling on a final configuration
+/ setup.
 
 See the [documentation](docs/README.md) for full instructions.
 
