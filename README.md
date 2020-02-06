@@ -42,7 +42,8 @@ See the [documentation](docs/README.md) for full instructions.
 
 ## Developer Quickstart
 
-Create server with root key access, create `vars/deploy.yml`:
+Add `ServerAliveInterval 120` to your `~/.ssh/config`. Create server
+with root key access then create `vars/deploy.yml`:
 
 ```yml
 ---
