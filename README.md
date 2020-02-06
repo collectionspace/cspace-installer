@@ -32,25 +32,38 @@ These features are optional but highly recommended. If you do not use
 these features of the installer we strongly advise hardening and
 securing your server before running the installer.
 
-We recommend starting with a newly created server and a freshly
-installed OS as a buildup to a production deployment. As you become
-familiar with the installation process and CollectionSpace you may want
-to wipe and reload the Operating System a few times before settling on
-a final configuration / setup.
+We recommend starting with a newly created as a buildup to a production
+deployment. As you become familiar with the installation process and
+CollectionSpace you may want to wipe and reload the Operating System a
+few times before settling on a final configuration / setup.
 
 See the [documentation](docs/README.md) for full instructions.
 
 ## Developer Quickstart
 
-Create server with root key access, then:
+Create server with root key access, create `vars/deploy.yml`:
+
+```yml
+---
+certbot_admin_email: no-reply@collectionspace.org
+certbot_certs: [] # comment this out if dns added and want SSL cert
+collectionspace_csadmin_password: keepmesecretplz
+collectionspace_force_build: False
+collectionspace_addr: 45.33.112.113 # update this (IP or domain)
+collectionspace_tenant: core
+permit_root_login: 'no'
+ssh_allowed_ip_addresses:
+  - "{{ lookup('url', 'http://checkip.amazonaws.com', split_lines=False) | replace('\n', '') }}"
+users:
+  - name: deploy
+    shell: bin/bash
+    public_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+```
+
+Run it:
 
 ```bash
-cp vars/example.yml vars/deploy.yml
-# update values as needed, uncomment:
-# certbot_certs: []
-# if domain not added to DNS or you're using IP address
-
-DOMAIN_OR_IP=installer.collectionspace.org
+DOMAIN_OR_IP=45.33.112.113
 ansible-playbook -i $DOMAIN_OR_IP, security.yml -u root -e @vars/deploy.yml
 ansible-playbook -i $DOMAIN_OR_IP, collectionspace.yml -u deploy -e @vars/deploy.yml
 ```
