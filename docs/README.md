@@ -8,7 +8,7 @@ On your local machine install:
 On the server you will need:
 
 - Ubuntu 18.04 LTS
-- SSH enabled and a user with an authorized SSH key
+- SSH enabled
 
 Minimum hardware requirements are:
 
@@ -51,8 +51,7 @@ will need to disable this default behavior (details below).
 
 ## Verify SSH connection
 
-You should be able to SSH to the server using an SSH key for
-authentication:
+You should be able to SSH to the server:
 
 ```bash
 # assumes current username for user and ~/.ssh/id_rsa for key
@@ -63,9 +62,7 @@ ssh $USERNAME@$HOSTNAME
 ssh -i /path/to/key $USERNAME@$HOSTNAME
 ```
 
-You may receive a `passphrase` prompt if your SSH key has one, but
-you should not receive a `password` prompt if key authentication is
-being used.
+We highly recommend using SSH key authentication and disabling passwords.
 
 ## Setup Ansible
 
