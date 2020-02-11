@@ -34,19 +34,17 @@ collectionspace_tenant: core
 permit_root_login: 'prohibit-password'
 
 # List of ip addresses for SSH
-# Example uses lookup current location ip address.
 # We recommend using an explicit list of known and trusted IP addresses
 ssh_allowed_ip_addresses:
   # - "{{ lookup('url', 'http://checkip.amazonaws.com', split_lines=False) | replace('\n', '') }}"
   - 0.0.0.0/0 # all
 
-# List of users to create on the server. Remove the `users` variable or
-# comment out these lines to disable user creation, however disabling
-# users with permit_root_login = "no" can prevent SSH access so if you
-# are not creating users with the installer ensure that at least 1 user
-# account exists for SSH access on the server and / or set
-# permit_root_login = "prohibit-password". Note: users created this way
-# have passwordless sudo privileges (i.e. it's a root like account)
+# List of users to create on the server (default: none). Not
+# creating users and permit_root_login = "no" can prevent SSH access
+# so ensure that at least 1 user account exists for SSH access on
+# the server and / or set permit_root_login = "prohibit-password".
+# Note: users created this way have passwordless sudo privileges
+# (i.e. it's a root like account)
 users: []
   # - name: deploy
   #   shell: bin/bash
