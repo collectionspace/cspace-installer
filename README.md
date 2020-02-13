@@ -1,6 +1,6 @@
 # CollectionSpace Installer
 
-![](https://github.com/actions/cspace-installer/workflows/Lint%20Installer/badge.svg)
+![](https://github.com/collectionspace/cspace-installer/workflows/Lint%20Installer/badge.svg)
 
 **Work in progress: targeting v5.3 (03/2020) for v1.0 release**
 
