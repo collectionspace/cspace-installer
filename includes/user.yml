@@ -4,7 +4,7 @@
   user:
     name: "{{ item.name }}"
     shell: /bin/bash
-    password: "{{ item.name | password_hash('sha512', 'salty')}}"
+    password: "{{ item.name | password_hash('sha512', 'salty') }}"
 
 - name: Add user to sudoers
   copy:
