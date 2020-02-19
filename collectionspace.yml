@@ -6,6 +6,13 @@
 
   pre_tasks:
     - import_tasks: includes/version.yml
+    - name: Install packages
+      apt:
+        pkg:
+          - python3-psycopg2
+        update_cache: yes
+      tags:
+        - apt
 
   roles:
     - role: postgresql

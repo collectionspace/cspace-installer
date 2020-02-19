@@ -10,7 +10,6 @@
   apt:
     pkg:
       - fail2ban
-      - python3-psycopg2
       - ufw
       - unattended-upgrades
 
