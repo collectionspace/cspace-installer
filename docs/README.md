@@ -119,6 +119,13 @@ ansible-playbook -i $DOMAIN, security.yml -u $USER -e @vars/deploy.yml
 
 # install collectionspace and dependencies
 ansible-playbook -i $DOMAIN, collectionspace.yml -u $USER -e @vars/deploy.yml
+
+# by default ansible will attempt to use ~/.ssh/id_rsa for SSH key auth
+# but you can override this on the command line
+ansible-playbook -i $DOMAIN, collectionspace.yml \
+  -u $USER \
+  -e @vars/deploy.yml \
+  --private-key ~/.ssh/my_private_key
 ```
 
 ## Progress summary
