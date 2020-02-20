@@ -119,9 +119,12 @@ ansible-playbook -i $DOMAIN, security.yml -u $USER -e @vars/deploy.yml
 
 # install collectionspace and dependencies
 ansible-playbook -i $DOMAIN, collectionspace.yml -u $USER -e @vars/deploy.yml
+```
 
-# by default ansible will attempt to use ~/.ssh/id_rsa for SSH key auth
-# but you can override this on the command line
+By default ansible will attempt to use ~/.ssh/id_rsa for SSH key auth
+but you can override this on the command line:
+
+```bash
 ansible-playbook -i $DOMAIN, collectionspace.yml \
   -u $USER \
   -e @vars/deploy.yml \
@@ -139,4 +142,9 @@ It's possible for the installer to get interrupted and fail part way
 through the process. Should that happen simply re-run the installer
 to determine whether it is able to correct any issues and complete
 the deployment. If not then you can reach out with questions on the
-[CollectionSpace mailing list](#).
+[CollectionSpace mailing list](http://lists.collectionspace.org/mailman/listinfo/talk_lists.collectionspace.org).
+
+
+## Next steps
+
+Review the [system overview](SYSTEM.md) documentation.
