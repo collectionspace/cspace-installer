@@ -14,8 +14,8 @@ certbot_create_if_missing: yes
 certbot_install_from_source: yes
 
 # COLLECTIONSPACE
-collectionspace_tomcat_version: apache-tomcat-8.5.40
-collectionspace_version: '5.2'
+collectionspace_tomcat_version: apache-tomcat-8.5.51
+collectionspace_version: '6.0'
 
 # ELASTICSEACH
 elasticsearch_version: '5.x'

@@ -2,8 +2,6 @@
 
 ![](https://github.com/collectionspace/cspace-installer/workflows/Lint%20Installer/badge.svg)
 
-**Work in progress: targeting v5.3 (03/2020) for v1.0 release**
-
 The installer provides an [Ansible](https://www.ansible.com/) playbook
 for setting up [CollectionSpace](https://www.collectionspace.org/) on an
 [Ubuntu](https://ubuntu.com/) server consistent with the [official
