@@ -1,6 +1,6 @@
 ---
 
-collectionspace_allocated_ram: "1524m"
+collectionspace_allocated_ram: "2048m"
 collectionspace_csadmin_password: False
 collectionspace_environment:
   "ANT_OPTS": "-Xmx{{ collectionspace_allocated_ram }}"
@@ -22,5 +22,5 @@ collectionspace_environment:
   "MAVEN_OPTS": "-Xmx{{ collectionspace_allocated_ram }}"
 collectionspace_force_build: False
 collectionspace_tenant: core
-collectionspace_tomcat_version: apache-tomcat-8.5.40
-collectionspace_version: '5.2'
+collectionspace_tomcat_version: apache-tomcat-8.5.51
+collectionspace_version: '6.0'
