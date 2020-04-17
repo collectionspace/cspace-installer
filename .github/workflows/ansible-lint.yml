@@ -9,9 +9,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Lint Installer
-      uses: ansible/ansible-lint-action@v4.1.0
+      uses: ansible/ansible-lint-action@master
       with:
         targets: |
           collectionspace.yml
           security.yml
-        args: -x 301,503
+        args: "-x 301,503"
