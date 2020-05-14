@@ -4,6 +4,7 @@
   apt:
     pkg:
       - ant
+      - curl
       - git
       - imagemagick
       - maven
