@@ -30,6 +30,6 @@ The list of tenants that will be enabled **and** accessible via the web interfac
 
 The Tomcat package version.
 
-    collectionspace_version: '5.2'
+    collectionspace_version: '6.0'
 
 The version to use when installing CollectionSpace.

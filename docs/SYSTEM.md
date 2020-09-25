@@ -9,38 +9,56 @@ Replace `cspace.example.org` with your domain or IP address.
 
 Initial login credentials are:
 
-- username: admin@$domain (i.e. admin@cspace.example.org)
+- username: admin@$TENANT.collectionspace.org
 - password: Administrator
 
-Installer managed components:
+Where `$TENANT` is the value of the `collectionspace_tenant` variable
+(i.e. admin@core.collectionspace.org).
 
-__CollectionSpace__
+## Installer managed components
+
+Names, locations and notes for the CollectionSpace components:
+
+### CollectionSpace
+
+Role: CollectionSpace application server.
 
 - Location: /opt/collectionspace/server/
 - Logs: /opt/collectionspace/server/logs/catalina.out
 - Port: 8180
 
-__Gateway__
+### Gateway
 
-TODO.
+Role: Facilitates access to published data.
 
-__ElasticSearch__
+- TODO
+
+### ElasticSearch
+
+Role: Search index for public browser applications.
 
 - Location: /var/lib/elasticsearch/
 - Logs: /var/log/elasticsearch/
 - Port: 9200
 
-__Nginx__
+### Nginx
+
+Role: Handles requests from the internet, proxied to the app server.
 
 - Location: /etc/nginx/
 - Logs: /var/log/nginx/
 - Port: 80,443 # latter if SSL enabled
+- Site config: /etc/nginx/sites-enabled/cspace.conf
 
-__Postgres__
+### Postgres
+
+Role: Data store.
 
 - Location: /var/lib/postgresql/
 - Logs: /var/log/postgresql/
 - Port: 5432
+
+#### Connecting to Postgres
 
 ```bash
 # connect to the auth db
