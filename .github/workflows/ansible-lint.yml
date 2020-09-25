@@ -14,4 +14,4 @@ jobs:
         targets: |
           collectionspace.yml
           security.yml
-        args: "-x 301,503"
+        args: "-x 208,301,503"
