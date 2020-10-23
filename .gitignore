@@ -3,6 +3,7 @@
 .terraform/
 *.tfvars
 *.tfstate*
+.vagrant/
 roles/*
 !roles/collectionspace/
 vars/*

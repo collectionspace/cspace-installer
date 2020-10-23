@@ -27,7 +27,7 @@
   with_items:
     - application
     - services
-  register: apps
+  register: source
 
 - name: Ensure CollectionSpace user ownernship
   file:

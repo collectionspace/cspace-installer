@@ -7,7 +7,7 @@ On your local machine install:
 
 On the server you will need:
 
-- Ubuntu 18.04 LTS
+- Ubuntu 18.04 LTS or newer
 - SSH enabled
 
 Minimum hardware requirements are:
@@ -95,7 +95,7 @@ Download the playbook to your local machine:
 git clone https://github.com/collectionspace/cspace-installer.git
 cd cspace-installer
 # check out the tag for the version of CollectionSpace you want to install (v6.0 and above are supported)
-git checkout v6.0
+git checkout v6.1.1
 ansible-galaxy install -r requirements.yml --force
 ```
 
