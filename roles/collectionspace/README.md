@@ -22,6 +22,10 @@ The CollectionSpace environment variables. See [defaults](defaults/main.yml).
 
 Run build steps regardless of conditional task status.
 
+    collectionspace_revision: 'v6.1.1'
+
+The CollectionSpace source branch / tag / commit to build.
+
     collectionspace_tenant: 'core'
 
 The list of tenants that will be enabled **and** accessible via the web interface.

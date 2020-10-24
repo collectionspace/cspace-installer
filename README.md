@@ -48,10 +48,11 @@ with root key access then create `vars/deploy.yml`:
 ```yml
 ---
 certbot_admin_email: no-reply@collectionspace.org
-certbot_certs: [] # comment this out if dns added and want SSL cert
+certbot_certs: [] # comment this out if you've added dns and want an SSL cert to be created
 collectionspace_csadmin_password: keepmesecretplz
 collectionspace_force_build: False
-collectionspace_addr: 45.33.112.113 # update this (IP or domain)
+# update this (IP or domain): for vagrant use: "localhost" [wsl], or "collectionspace.local" [native]
+collectionspace_addr: 45.33.112.113
 collectionspace_tenant: core
 permit_root_login: 'no'
 ssh_allowed_ip_addresses:
@@ -62,13 +63,34 @@ users:
     public_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
 ```
 
-Run it:
+Run it locally (this does not run the security tasks):
+
+```bash
+sudo apt-get install sshpass
+vagrant plugin install vagrant-hostmanager
+vagrant up
+
+# when the provisioning has completed we have to kick it
+# because we have no service manager in a vagrant / docker env
+vagrant ssh # password 'root'
+su - collectionspace
+$CSPACE_JEESERVER_HOME/bin/startup.sh
+# to view logs
+tail -f $CSPACE_JEESERVER_HOME/logs/catalina.out
+```
+
+This of course requires that Ansible, Vagrant and Docker are installed but is otherwise
+the easiest and quicket way of getting a local deployment up and running for testing.
+
+Run it using an existing server:
 
 ```bash
 DOMAIN_OR_IP=45.33.112.113
 ansible-playbook -i $DOMAIN_OR_IP, security.yml -u root -e @vars/deploy.yml
 ansible-playbook -i $DOMAIN_OR_IP, collectionspace.yml -u deploy -e @vars/deploy.yml
 ```
+
+Either way CollectionSpace will be available at: http://{collectionspace_addr}
 
 ## License
 

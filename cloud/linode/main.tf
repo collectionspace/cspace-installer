@@ -7,11 +7,6 @@ variable "root_pass" {}
 variable "region" { default = "us-central" }
 variable "token" {}
 
-# VERSION
-terraform {
-  required_version = "~> 0.12.1"
-}
-
 # PROVIDER
 provider "linode" {
   token = var.token

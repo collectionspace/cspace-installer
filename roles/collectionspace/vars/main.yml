@@ -1,0 +1,4 @@
+---
+
+collectionspace_service_path: /etc/systemd/system/collectionspace.service
+collectionspace_vagrant: false

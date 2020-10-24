@@ -22,12 +22,12 @@
   git:
     repo: "https://github.com/collectionspace/{{ item }}"
     dest: "/opt/collectionspace/{{ item }}"
-    version: "v{{ collectionspace_version }}-branch"
+    version: "{{ collectionspace_revision }}"
     force: yes
   with_items:
     - application
     - services
-  register: apps
+  register: source
 
 - name: Ensure CollectionSpace user ownernship
   file:
