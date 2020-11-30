@@ -1,0 +1,10 @@
+zuul:
+  routes:
+    core-cspace-services:
+      password: gateway4u
+      path: /core/cspace-services/**
+      url: http://localhost:8180/cspace-services
+      username: gateway@core.collectionspace.org
+    core-es:
+      path: /core/es/**
+      url: http://${ES_HOST}/nuxeo_collectionspace/

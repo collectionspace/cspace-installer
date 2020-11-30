@@ -1,0 +1,55 @@
+version: '2'
+services:
+  app:
+    image: collectionspace/core:6.1.1
+    build:
+      context: .
+      args:
+        COLLECTIONSPACE_BRANCH: v6.1.1
+        COLLECTIONSPACE_REPOSITORY: https://github.com/collectionspace
+        COLLECTIONSPACE_TOMCAT: apache-tomcat-8.5.51
+        COLLECTIONSPACE_VERSION: 6.0
+        CSPACE_ENV: test
+        CSPACE_INSTANCE_ID: _collectionspace
+        ##### EMAIL
+        CSPACE_SMTP_EMAIL_AUTH_DEBUG_OPT: "false"
+        CSPACE_SMTP_EMAIL_HOST_OPT: localhost
+        CSPACE_SMTP_EMAIL_AUTH_PASSWORD_OPT: n/a
+        CSPACE_SMTP_EMAIL_AUTH_USERNAME_OPT: n/a
+        ##### TENANTS
+        CSPACE_CORE_CREATE_DISABLED_OPT: "false"
+        ##### DB
+        DB_PORT: 5432
+        DB_HOST: db
+        DB_CSADMIN_PASSWORD: csadmin
+        DB_CSPACE_PASSWORD: csadmin
+        DB_NUXEO_PASSWORD: csadmin
+        DB_READER_PASSWORD: csreader
+        ##### ELASTICSEARCH
+        ES_HOST: es:9200
+        ##### S3
+        S3_BINARY_MANAGER_BUCKET: n/a
+        S3_BINARY_MANAGER_ID: n/a
+        S3_BINARY_MANAGER_REGION: n/a
+        S3_BINARY_MANAGER_SECRET: n/a
+        S3_BINARY_MANAGER_ENABLED: "false"
+        ##### JAVA
+        ANT_OPTS: -Xmx1024m -XX:MaxPermSize=512m
+        CATALINA_OPTS: -Dfile.encoding=UTF-8 -Duser.timezone=UTC -Xmx2048m -XX:MaxPermSize=384m -Dcors.allowed.origins=*
+        MAVEN_OPTS: -Xmx1024m -XX:MaxPermSize=512m
+    ports:
+      - "8180:8180"
+    depends_on:
+      - db
+      - es
+  db:
+    image: collectionspace:db
+    environment:
+      POSTGRES_PASSWORD: postgres
+      DB_CSADMIN_PASSWORD: csadmin
+    ports:
+      - "5432:5432"
+  es:
+    image: elasticsearch:5.6.12
+    ports:
+      - "9200:9200"
