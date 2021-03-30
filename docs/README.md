@@ -7,7 +7,7 @@ On your local machine install:
 
 On the server you will need:
 
-- Ubuntu 18.04 LTS or newer
+- Ubuntu 18.04 LTS
 - SSH enabled
 
 Minimum hardware requirements are:
