@@ -1,7 +1,7 @@
 ---
 
 # ANSIBLE
-ansible_min_version: '2.9'
+ansible_min_version: '2.10'
 
 # CERTBOT
 certbot_auto_renew_options: --agree-tos --no-self-upgrade --pre-hook "service nginx stop" --post-hook "service nginx start"
@@ -11,7 +11,7 @@ certbot_certs:
     domains:
       - "{{ collectionspace_addr }}"
 certbot_create_if_missing: yes
-certbot_install_from_source: yes
+certbot_install_method: snap
 
 # COLLECTIONSPACE
 collectionspace_revision: 'v6.1.1' # branch, tag, commit etc.

@@ -2,7 +2,7 @@
 
 - src: https://github.com/geerlingguy/ansible-role-certbot.git
   name: certbot
-  version: 3.0.3
+  version: 4.0.0
 
 - src: https://github.com/geerlingguy/ansible-role-elasticsearch
   name: elasticsearch

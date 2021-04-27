@@ -36,4 +36,5 @@
     login_user: csadmin
     login_password: "{{ collectionspace_csadmin_password }}"
     path_to_script: /root/casts.sql
+    as_single_query: yes
   when: casts.changed
