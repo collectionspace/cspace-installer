@@ -12,12 +12,16 @@
     ansible_facts.services['collectionspace.service'] is defined and
     ansible_facts.services['collectionspace.service']['state'] == 'running'
 
+- name: Set build stamp
+  set_fact:
+    build_stamp: "{{ ansible_date_time.epoch }}"
+
 - name: Build CollectionSpace
   shell: >
     cd /opt/collectionspace/services && mvn clean install -DskipTests && \
     cd /opt/collectionspace/application && mvn clean install -DskipTests && \
     cd /opt/collectionspace/services && ant undeploy deploy create_db import && \
-    touch /opt/collectionspace/build/build.{{ ansible_date_time.epoch }}
+    touch /opt/collectionspace/build/build.{{ build_stamp }}
   args:
     executable: /bin/bash
   async: 7200
@@ -25,7 +29,7 @@
   become: true
   become_user: collectionspace
 
-- name: "Wait for CollectionSpace build (build.{{ ansible_date_time.epoch }}"
+- name: "Wait for CollectionSpace build (build.{{ build_stamp }}"
   wait_for:
-    path: "/opt/collectionspace/build/build.{{ ansible_date_time.epoch }}"
+    path: "/opt/collectionspace/build/build.{{ build_stamp }}"
     timeout: 7200

@@ -14,16 +14,15 @@ certbot_create_if_missing: yes
 certbot_install_method: snap
 
 # COLLECTIONSPACE
-collectionspace_revision: 'v6.1.1' # branch, tag, commit etc.
-collectionspace_tomcat_version: apache-tomcat-8.5.51 # version of tomcat included with version
-collectionspace_version: '6.0' # server pkg version
+collectionspace_revision: v7.0-branch # branch, tag, commit etc.
+collectionspace_server_url: https://s3-us-west-2.amazonaws.com/cs-public-shared-files/releases/6.1/cspace-server-6.1.tar.gz
+collectionspace_tomcat_version: apache-tomcat-8.5.51 # version of tomcat included with server
 
 # ELASTICSEACH
 elasticsearch_version: '5.x'
 
 # JAVA
-java_packages:
-  - openjdk-8-jdk-headless
+java_package: "openjdk-{{ collectionspace_java_version }}-jdk-headless"
 
 # NGINX
 nginx_remove_default_vhost: true

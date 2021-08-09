@@ -9,9 +9,11 @@
     - name: Install packages
       apt:
         pkg:
+          - acl
           - htop
           - gpg
           - python3-psycopg2
+          - "{{ java_package }}"
         update_cache: yes
       tags:
         - apt
@@ -27,6 +29,7 @@
       tags: ['nginx', 'web']
     - role: certbot
       tags: ['certbot', 'certs']
+      when: certbot_certs | length > 0
 
   tasks:
     - name: Create CollectionSpace vhost config
