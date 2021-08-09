@@ -16,6 +16,10 @@ Update the values in `terraform.tfvars`.
 
 Path to an [SSH public key](#) file added to the root account.
 
+### image (default: linode/ubuntu21.04)
+
+The server operating system image.
+
 ### instance_type (default: g6-standard-2)
 
 The [Linode instance type](#).
@@ -38,3 +42,12 @@ terraform output # print public ip address
 ```
 
 To tear down the server you can use: `terraform destroy`.
+
+## Accessing the server
+
+```bash
+# format
+ssh ${user}@${ip_address}
+# example
+ssh root@54.43.32.21
+```
