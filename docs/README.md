@@ -2,12 +2,12 @@
 
 On your local machine install:
 
-- Ansible 2.9+
-- Terraform v0.12+ (optional, only if you need to create a server)
+- Ansible
+- Terraform (optional, only if you need to create a server)
 
 On the server you will need:
 
-- Ubuntu 18.04 LTS
+- Ubuntu LTS
 - SSH enabled
 
 Minimum hardware requirements are:
