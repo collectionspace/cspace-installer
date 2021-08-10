@@ -1,7 +1,7 @@
 # VARIABLES
 variable "authorized_key" { default = "~/.ssh/id_rsa.pub" }
 variable "backups_enabled" { default = false }
-variable "image" { default = "linode/ubuntu21.04" }
+variable "image" { default = "linode/ubuntu20.04" }
 variable "instance_type" { default = "g6-standard-2" }
 variable "root_pass" {}
 variable "region" { default = "us-central" }

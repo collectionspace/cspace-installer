@@ -2,6 +2,8 @@
 
 collectionspace_allocated_ram: "2048m"
 collectionspace_csadmin_password: False
+collectionspace_java_version: "8"
+
 collectionspace_environment:
   "ANT_OPTS": "-Xmx{{ collectionspace_allocated_ram }}"
   "CATALINA_HOME": "/opt/collectionspace/server"
@@ -17,11 +19,12 @@ collectionspace_environment:
   "DB_NUXEO_PASSWORD": "{{ collectionspace_csadmin_password }}"
   "DB_CSPACE_PASSWORD": "{{ collectionspace_csadmin_password }}"
   "DB_READER_PASSWORD": "{{ collectionspace_csadmin_password }}"
-  "JAVA_HOME": "/usr/lib/jvm/java-8-openjdk-amd64/"
+  "JAVA_HOME": "/usr/lib/jvm/java-{{ collectionspace_java_version }}-openjdk-amd64/"
   "JEE_PORT": "8180"
   "MAVEN_OPTS": "-Xmx{{ collectionspace_allocated_ram }}"
+
 collectionspace_force_build: False
 collectionspace_tenant: core
-collectionspace_revision: 'v6.1.1'
+collectionspace_revision: v7.0-branch
 collectionspace_tomcat_version: apache-tomcat-8.5.51
-collectionspace_version: '6.0'
+collectionspace_server_url: https://s3-us-west-2.amazonaws.com/cs-public-shared-files/releases/6.1/cspace-server-6.1.tar.gz

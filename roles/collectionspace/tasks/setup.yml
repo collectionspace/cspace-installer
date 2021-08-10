@@ -8,7 +8,7 @@
       - git
       - imagemagick
       - maven
-      - openjdk-8-jdk
+      - openjdk-8-jdk-headless
       - openjdk-8-jre-headless
       - python3-psycopg2
       - wget

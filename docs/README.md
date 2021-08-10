@@ -94,8 +94,6 @@ Download the playbook to your local machine:
 # download and setup ansible playbook
 git clone https://github.com/collectionspace/cspace-installer.git
 cd cspace-installer
-# check out the tag for the version of CollectionSpace you want to install (v6.0 and above are supported)
-git checkout v6.1.1
 ansible-galaxy install -r requirements.yml --force
 ```
 
