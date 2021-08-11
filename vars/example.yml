@@ -26,6 +26,9 @@ collectionspace_tenant: core
 ##### SECURITY - SETTINGS ONLY APPLY WHEN security.yml IS RUN
 #####
 
+# Allow additional common dev port access (3000, 8080 etc.)
+permit_dev_ports: False
+
 # Mode for root user login, options:
 # - "no" # disable root user ssh. Note: the quotes are required
 # - prohibit-password # key only, password not allowed

@@ -16,6 +16,19 @@
     - '80'
     - '443'
 
+- name: Allow dev port access
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  loop:
+    - '3000'
+    - '8080'
+    - '8081'
+    - '8089'
+    - '8180'
+  when: permit_dev_ports
+
 - name: Set default deny firewall policy
   ufw:
     state: enabled
