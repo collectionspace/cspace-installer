@@ -17,8 +17,18 @@
         update_cache: yes
       tags:
         - apt
+    - name: Create .pgpass
+      template:
+        src: templates/pgpass.j2
+        dest: /root/.pgpass
+        mode: 0600
+      tags:
+        - db
+        - postgres
 
   roles:
+    - role: swap
+      tags: ['never', 'swap']
     - role: postgresql
       tags: ['db', 'postgres']
     - role: elasticsearch
@@ -37,8 +47,20 @@
         src: templates/cspace.conf.j2
         dest: "/etc/nginx/sites-enabled/cspace.conf"
         mode: 0644
-      notify: restart nginx
+      notify: reload nginx
       tags:
         - nginx
         - vhost
         - web
+
+    # do this last to minimize wait on startup initialization
+    - name: Check that CollectionSpace is up before exiting
+      uri:
+        # bypass proxy, go straight to tomcat
+        url: "http://127.0.0.1:8180/cspace/{{ collectionspace_tenant }}/login"
+        method: GET
+        status_code: 200
+      register: result
+      until: result.status == 200
+      retries: 15
+      delay: 60

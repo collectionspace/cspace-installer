@@ -15,6 +15,8 @@ Initial login credentials are:
 Where `$TENANT` is the value of the `collectionspace_tenant` variable
 (i.e. admin@core.collectionspace.org).
 
+**For custom tenants the username is set in the tenants settings.xml.**
+
 ## Installer managed components
 
 Names, locations and notes for the CollectionSpace components:

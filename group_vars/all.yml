@@ -39,3 +39,6 @@ ssh_config:
     value: '120'
   - key: ClientAliveCountMax
     value: '720'
+
+# SWAP (only when --tags=swap included)
+swap_file_size_mb: '4096'

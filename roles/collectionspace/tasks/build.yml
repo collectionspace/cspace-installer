@@ -12,24 +12,33 @@
     ansible_facts.services['collectionspace.service'] is defined and
     ansible_facts.services['collectionspace.service']['state'] == 'running'
 
-- name: Set build stamp
-  set_fact:
-    build_stamp: "{{ ansible_date_time.epoch }}"
-
-- name: Build CollectionSpace
+- name: Build CollectionSpace services layer
   shell: >
-    cd /opt/collectionspace/services && mvn clean install -DskipTests && \
-    cd /opt/collectionspace/application && mvn clean install -DskipTests && \
-    cd /opt/collectionspace/services && ant undeploy deploy create_db import && \
-    touch /opt/collectionspace/build/build.{{ build_stamp }}
+    cd /opt/collectionspace/services && mvn clean install -DskipTests
   args:
     executable: /bin/bash
-  async: 7200
-  poll: 0
   become: true
   become_user: collectionspace
 
-- name: "Wait for CollectionSpace build (build.{{ build_stamp }}"
-  wait_for:
-    path: "/opt/collectionspace/build/build.{{ build_stamp }}"
-    timeout: 7200
+- name: Build CollectionSpace application layer
+  shell: >
+    cd /opt/collectionspace/application && mvn clean install -DskipTests
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: collectionspace
+
+- name: Build CollectionSpace deployment and setup authz database
+  shell: >
+    cd /opt/collectionspace/services && ant undeploy deploy create_db import
+  args:
+    executable: /bin/bash
+  become: true
+  become_user: collectionspace
+
+# this is a marker that at least the initial build was completed
+- name: Create bootstrap file
+  file:
+    path: "/opt/collectionspace/build/bootstrap"
+    state: touch
+  when: not bootstrap.stat.exists

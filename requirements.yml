@@ -1,5 +1,8 @@
 ---
 
+# ugh, need to add this to line 18: install-with-snap.yml
+# when: ansible_os_family != "Debian"
+# https://github.com/geerlingguy/ansible-role-certbot/pull/152
 - src: https://github.com/geerlingguy/ansible-role-certbot.git
   name: certbot
   version: 4.1.0
@@ -15,3 +18,7 @@
 - src: https://github.com/geerlingguy/ansible-role-postgresql
   name: postgresql
   version: 3.1.1
+
+- src: https://github.com/geerlingguy/ansible-role-swap
+  name: swap
+  version: 1.0.2

@@ -97,6 +97,8 @@ cd cspace-installer
 ansible-galaxy install -r requirements.yml --force
 ```
 
+**Warning: currently the [certbot role](../requirements.yml) needs to be modified.**
+
 ## Running Ansible
 
 For Ansible to setup CollectionSpace on your server you will need to
