@@ -3,12 +3,18 @@
 - name: Get service facts
   service_facts:
 
+- name: Check if initial build was completed
+  stat:
+    path: /opt/collectionspace/build/bootstrap
+  register: bootstrap
+
 - import_tasks: user.yml
 - import_tasks: setup.yml
 - import_tasks: download.yml
 - import_tasks: build.yml
   environment: "{{ collectionspace_environment }}"
   when: >
+    not bootstrap.stat.exists or
     collectionspace_force_build or
     cspace_env.changed or
     server.changed or

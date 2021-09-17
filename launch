@@ -1,0 +1,147 @@
+#!/bin/bash
+# Note: this is only for launching Packer built cspace instances on AWS
+# ./launch fcart fineartmuseum # $TENANT $SITE [$DOMAIN]
+
+TENANT=${1:-core}
+SITE=${2:-""}
+DOMAIN=${3:-collectionspace.org}
+INSTANCE_TYPE=t3.medium
+KEY_NAME=aws-cspace-pkr
+
+if [ "$SITE" = "" ]; then
+  echo "Site name must be specified to continue!"
+  exit 1
+fi
+
+ZONE_ID=$(
+  aws route53 list-hosted-zones-by-name \
+    --dns-name $DOMAIN \
+    --output text --query 'HostedZones[*].Id' \
+    --profile collectionspace
+)
+
+if [ "$ZONE_ID" = "" ]; then
+  echo "Hosted zone id was not found, unable to continue."
+  exit 1
+fi
+
+IMAGE_ID=$(
+  aws ec2 describe-images \
+    --filters "Name=tag:tenant,Values=$TENANT" \
+    --query "reverse(sort_by(Images, &CreationDate))[:1].ImageId" \
+    --output text \
+    --profile collectionspace
+)
+
+if [ "$IMAGE_ID" = "" ]; then
+  echo "EC2 AMI was not found!"
+  exit 1
+fi
+
+echo "Using image id: $IMAGE_ID"
+
+ELASTIC_IP_ALLOC=$(
+  aws ec2 allocate-address \
+    --domain vpc \
+    --output text --query 'AllocationId' \
+    --profile collectionspace
+)
+
+if [ "$ELASTIC_IP_ALLOC" = "" ]; then
+  echo "EC2 Elastic IP address was not allocated, unable to continue."
+  exit 1
+fi
+
+INSTANCE_ID=$(
+  aws ec2 run-instances \
+    --associate-public-ip-address \
+    --count 1 \
+    --ebs-optimized \
+    --image-id $IMAGE_ID \
+    --instance-type $INSTANCE_TYPE \
+    --key-name $KEY_NAME \
+    --tag-specifications "ResourceType=instance,Tags=[{Key=name,Value=cspace-$TENANT-$SITE-$DOMAIN}]" \
+    --output text --query 'Instances[*].InstanceId' \
+    --profile collectionspace
+)
+
+echo "Creating instance: $INSTANCE_ID"
+
+while STATE=$(
+  aws ec2 describe-instances \
+    --instance-ids $INSTANCE_ID \
+    --output text --query 'Reservations[*].Instances[*].State.Name' \
+    --profile collectionspace
+); test "$STATE" != "running"; do
+    sleep 10;
+    echo "Waiting for instance: $INSTANCE_ID (zzz)"
+done;
+
+echo "Associating EIP with instance: $INSTANCE_ID $ELASTIC_IP_ALLOC"
+
+aws ec2 associate-address \
+  --instance-id $INSTANCE_ID \
+  --allocation-id $ELASTIC_IP_ALLOC \
+  --profile collectionspace
+
+IP_ADDRESS=$(
+  aws ec2 describe-instances \
+    --instance-ids $INSTANCE_ID \
+    --output text --query 'Reservations[*].Instances[*].PublicIpAddress' \
+    --profile collectionspace
+)
+
+if [ "$IP_ADDRESS" = "" ]; then
+  echo "EC2 IP address was not found, unable to continue."
+  exit 1
+fi
+
+REQUEST=$(cat <<JSON
+{
+  "Comment": "CREATE DNS RECORD",
+  "Changes": [
+    {
+      "Action": "CREATE",
+      "ResourceRecordSet": {
+        "Name": "${SITE}.${DOMAIN}",
+        "Type": "A",
+        "TTL": 300,
+        "ResourceRecords": [{ "Value": "${IP_ADDRESS}" }]
+      }
+    }
+  ]
+}
+JSON
+)
+
+echo $REQUEST > request.json
+echo "Creating DNS record: $SITE.$DOMAIN -> $IP_ADDRESS"
+
+CHANGE_ID=$(
+  aws route53 change-resource-record-sets \
+    --hosted-zone-id $ZONE_ID \
+    --change-batch file://request.json \
+    --output text --query 'ChangeInfo.Id' \
+    --profile collectionspace
+)
+rm -f request.json
+
+echo "DNS request submitted. Waiting for propagation ..."
+
+aws route53 wait resource-record-sets-changed \
+  --id $CHANGE_ID \
+  --profile collectionspace
+
+echo "Updating instance configuration"
+
+ansible-playbook -i $IP_ADDRESS, collectionspace.yml \
+  --user ubuntu \
+  --private-key ~/.ssh/$KEY_NAME \
+  --extra-vars "@vars/build.yml" \
+  --extra-vars "collectionspace_tenant=$TENANT" \
+  --extra-vars "collectionspace_addr=$SITE.$DOMAIN" \
+  --tags=swap,certbot,vhost
+
+echo "Configuration complete!"
+echo "For SSH access use: ssh -i ~/.ssh/$KEY_NAME ubuntu@$SITE.$DOMAIN"
+echo "For web access use: https://$SITE.$DOMAIN/cspace/$TENANT/login"

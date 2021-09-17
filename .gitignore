@@ -7,5 +7,6 @@
 roles/*
 !roles/collectionspace/
 vars/*
+!vars/build.yml
 !vars/example.yml
-!vars/security.yml
+request.json

@@ -1,0 +1,11 @@
+---
+# vars for packer image builds (don't use this for anything else)
+certbot_admin_email: no-reply@collectionspace.org
+collectionspace_csadmin_password: Administrator
+collectionspace_addr: default.collectionspace.org # placeholder
+collectionspace_tenant: False # overriden per provisioner
+permit_dev_ports: False
+permit_root_login: 'no'
+ssh_allowed_ip_addresses:
+  - 0.0.0.0/0 # all
+users: []
