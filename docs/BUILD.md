@@ -41,6 +41,6 @@ This will create:
 - Web: https://fineartmuseum.collectionspace.org/cspace/fcart/login
 
 <!-- TODO: cleanup -->
-<!-- 1. Delete ec2 instance -->
+<!-- 1. Delete ec2 instance & related snapshot -->
 <!-- 2. Delete / Unregister EIP -->
 <!-- 3. Remove DNS entry -->
