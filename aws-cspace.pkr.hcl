@@ -65,10 +65,34 @@ build {
   }
 
   source "amazon-ebs.ubuntu" {
+    name     = "lhmc"
+    ami_name = "${var.ami_prefix}-lhmc-${var.revision}-${local.timestamp}"
+    tags = {
+      tenant = "lhmc"
+    }
+  }
+
+  source "amazon-ebs.ubuntu" {
     name     = "fcart"
     ami_name = "${var.ami_prefix}-fcart-${var.revision}-${local.timestamp}"
     tags = {
       tenant = "fcart"
+    }
+  }
+
+  source "amazon-ebs.ubuntu" {
+    name     = "anthro"
+    ami_name = "${var.ami_prefix}-anthro-${var.revision}-${local.timestamp}"
+    tags = {
+      tenant = "anthro"
+    }
+  }
+
+  source "amazon-ebs.ubuntu" {
+    name     = "materials"
+    ami_name = "${var.ami_prefix}-materials-${var.revision}-${local.timestamp}"
+    tags = {
+      tenant = "materials"
     }
   }
 
