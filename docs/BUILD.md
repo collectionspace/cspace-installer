@@ -32,7 +32,7 @@ packer build -on-error=ask aws-cspace.pkr.hcl
 **Warning: currently the [certbot role](../requirements.yml) needs to be modified.**
 
 ```bash
-./launch fcart fineartmuseum collectionspace.org
+./scripts/launch fcart fineartmuseum collectionspace.org
 ```
 
 This will create:
@@ -41,6 +41,34 @@ This will create:
 - Web: https://fineartmuseum.collectionspace.org/cspace/fcart/login
 
 <!-- TODO: cleanup -->
-<!-- 1. Delete ec2 instance & related snapshot -->
+<!-- 1. Delete ec2 instance -->
 <!-- 2. Delete / Unregister EIP -->
 <!-- 3. Remove DNS entry -->
+
+## Installer reference site
+
+Created using:
+
+```bash
+# don't need to run this unless the installer server is not up
+./scripts/launch core installer
+```
+
+To manange:
+
+```bash
+ansible-playbook -i installer.collectionspace.org, collectionspace.yml \
+  --user ubuntu \
+  --private-key ~/.ssh/aws-cspace-pkr \
+  --extra-vars "@vars/build.yml" \
+  --extra-vars "collectionspace_tenant=core" \
+  --extra-vars "collectionspace_addr=installer.collectionspace.org"
+```
+
+To access:
+
+```bash
+ssh -i ~/.ssh/aws-cspace-pkr ubuntu@installer.collectionspace.org
+```
+
+To view: https://installer.collectionspace.org

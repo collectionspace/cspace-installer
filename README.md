@@ -15,7 +15,7 @@ For a turn-key, production ready deployment there are just two requirements:
 All of the components in a CollectionSpace system will be installed:
 
 - CollectionSpace application
-- CollectionSpace public gateway
+- CollectionSpace public gateway & browser
 - [ElasticSearch](https://www.elastic.co/)
 - [Nginx](https://www.nginx.com/) web proxy
 - [Postgres](https://www.postgresql.org/) database server

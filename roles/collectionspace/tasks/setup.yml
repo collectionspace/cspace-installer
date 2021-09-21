@@ -14,13 +14,16 @@
       - wget
     update_cache: True
 
-- name: Create CollectionSpace directory
+- name: Create CollectionSpace directories
   file:
-    path: /opt/collectionspace/build
+    path: "/opt/collectionspace/{{ item }}"
     owner: collectionspace
     group: collectionspace
     state: directory
     mode: '0755'
+  with_items:
+    - build
+    - browser
 
 - name: Transfer casts SQL to server
   copy:

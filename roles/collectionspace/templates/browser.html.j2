@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CollectionSpace Public Browser</title>
+	<link rel="stylesheet" href="{{ collectionspace_browser.bulma_url }}">
+
+	<style type="text/css" media="screen">
+		body {
+			display: flex;
+			min-height: 100vh;
+			flex-direction: column;
+		}
+
+		#wrapper {
+			flex: 1;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="wrapper">
+		<nav class="navbar is-black py-2" role="navigation" aria-label="main navigation">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="https://{{ collectionspace_addr }}">
+					<img src="{{ collectionspace_browser.logo_url }}">
+				</a>
+			</div>
+
+			<div id="navbarBasic" class="navbar-menu">
+				<div class="navbar-end">
+					<div class="navbar-item">
+						<div class="buttons">
+							<a class="button is-light" href="https://{{ collectionspace_addr }}/cspace/{{ collectionspace_tenant }}/login">
+								Log in
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<div id="cspace-browser"></div>
+	</div>
+
+	<footer class="footer" style="background-color: rgb(245, 245, 245)">
+		<div class="columns">
+			<div class="column is-one-fifth"></div>
+			<div class="column is-three-fifths">
+				<div class="content has-text-centered">
+					<p>
+						<a href="https://collectionspace.org">CollectionSpace</a></strong> is a web-based, open-source
+						collections management software for museums and more.
+					</p>
+				</div>
+			</div>
+			<div class="column is-one-fifth"></div>
+		</div>
+	</footer>
+
+	<script src="{{ collectionspace_browser.plugin_url }}"></script>
+	<script>
+		cspacePublicBrowser({
+			gatewayUrl: 'https://{{ collectionspace_addr }}/gateway/{{ collectionspace_tenant }}'
+		});
+	</script>
+</body>
+
+</html>

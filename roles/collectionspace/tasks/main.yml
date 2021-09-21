@@ -19,6 +19,7 @@
     cspace_env.changed or
     server.changed or
     source.changed
+- import_tasks: gateway.yml
 - import_tasks: service.yml
   # we do not want systemd in a docker host OS
   when: not collectionspace_vagrant

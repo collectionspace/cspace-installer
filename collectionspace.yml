@@ -53,6 +53,8 @@
         - vhost
         - web
 
+    # TODO: initialize reports
+
     # do this last to minimize wait on startup initialization
     - name: Check that CollectionSpace is up before exiting
       uri:
