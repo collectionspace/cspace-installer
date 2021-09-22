@@ -1,6 +1,6 @@
 #!/bin/bash
 # Note: this is only for launching Packer built cspace instances on AWS
-# ./launch fcart fineartmuseum # $TENANT $SITE [$DOMAIN]
+# ./scripts/launch fcart fineartmuseum # $TENANT $SITE [$DOMAIN]
 
 TENANT=${1:-core}
 SITE=${2:-""}
@@ -10,18 +10,6 @@ KEY_NAME=aws-cspace-pkr
 
 if [ "$SITE" = "" ]; then
   echo "Site name must be specified to continue!"
-  exit 1
-fi
-
-ZONE_ID=$(
-  aws route53 list-hosted-zones-by-name \
-    --dns-name $DOMAIN \
-    --output text --query 'HostedZones[*].Id' \
-    --profile collectionspace
-)
-
-if [ "$ZONE_ID" = "" ]; then
-  echo "Hosted zone id was not found, unable to continue."
   exit 1
 fi
 
@@ -96,41 +84,7 @@ if [ "$IP_ADDRESS" = "" ]; then
   exit 1
 fi
 
-REQUEST=$(cat <<JSON
-{
-  "Comment": "CREATE DNS RECORD",
-  "Changes": [
-    {
-      "Action": "CREATE",
-      "ResourceRecordSet": {
-        "Name": "${SITE}.${DOMAIN}",
-        "Type": "A",
-        "TTL": 300,
-        "ResourceRecords": [{ "Value": "${IP_ADDRESS}" }]
-      }
-    }
-  ]
-}
-JSON
-)
-
-echo $REQUEST > request.json
-echo "Creating DNS record: $SITE.$DOMAIN -> $IP_ADDRESS"
-
-CHANGE_ID=$(
-  aws route53 change-resource-record-sets \
-    --hosted-zone-id $ZONE_ID \
-    --change-batch file://request.json \
-    --output text --query 'ChangeInfo.Id' \
-    --profile collectionspace
-)
-rm -f request.json
-
-echo "DNS request submitted. Waiting for propagation ..."
-
-aws route53 wait resource-record-sets-changed \
-  --id $CHANGE_ID \
-  --profile collectionspace
+./scripts/dns $IP_ADDRESS $SITE $DOMAIN
 
 echo "Updating instance configuration"
 

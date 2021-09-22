@@ -1,8 +1,24 @@
 ---
 
+collectionspace_addr: False
 collectionspace_allocated_ram: "2048m"
+collectionspace_browser:
+  enabled: true
+  bulma_url: https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css
+  logo_url: https://cs-public-shared-files.s3.us-west-2.amazonaws.com/collectionspace.png
+  plugin_url: https://unpkg.com/cspace-public-browser@1.1.0/dist/cspacePublicBrowser.min.js
 collectionspace_csadmin_password: False
+collectionspace_db_host: localhost
+collectionspace_es_host: "{{ elasticsearch_network_host }}:{{ elasticsearch_http_port }}"
+collectionspace_force_build: False
+collectionspace_gateway_url: https://cs-public-shared-files.s3.us-west-2.amazonaws.com/org.collectionspace.publicbrowser-1.0.0-SNAPSHOT.war
+collectionspace_instance_id: _default
 collectionspace_java_version: "8"
+collectionspace_revision: v7.0-branch # branch, tag, commit etc.
+collectionspace_server_url: https://s3-us-west-2.amazonaws.com/cs-public-shared-files/releases/7.0/cspace-server-7.0.tar.gz
+collectionspace_tenant: core
+collectionspace_tenant_gateway_extras: False
+collectionspace_tomcat_version: apache-tomcat-8.5.51 # version of tomcat included with server
 
 collectionspace_environment:
   "ANT_OPTS": "-Xmx{{ collectionspace_allocated_ram }}"
@@ -11,20 +27,16 @@ collectionspace_environment:
   "CATALINA_PID": "/opt/collectionspace/server/bin/tomcat.pid"
   # Enable Core by default, we do not recommend changing this
   "CSPACE_CORE_CREATE_DISABLED_OPT": "false"
-  "CSPACE_INSTANCE_ID": "_default"
+  "CSPACE_INSTANCE_ID": "{{ collectionspace_instance_id }}"
   "CSPACE_JEESERVER_HOME": "/opt/collectionspace/server"
   "DB_CSADMIN_PASSWORD": "{{ collectionspace_csadmin_password }}"
-  "DB_HOST": "localhost"
+  "DB_HOST": "{{ collectionspace_db_host }}"
   "DB_PORT": "5432"
   "DB_NUXEO_PASSWORD": "{{ collectionspace_csadmin_password }}"
   "DB_CSPACE_PASSWORD": "{{ collectionspace_csadmin_password }}"
   "DB_READER_PASSWORD": "{{ collectionspace_csadmin_password }}"
+  "ES_HOST": "{{ collectionspace_es_host }}"
   "JAVA_HOME": "/usr/lib/jvm/java-{{ collectionspace_java_version }}-openjdk-amd64/"
   "JEE_PORT": "8180"
   "MAVEN_OPTS": "-Xmx{{ collectionspace_allocated_ram }}"
-
-collectionspace_force_build: False
-collectionspace_tenant: core
-collectionspace_revision: v7.0-branch # branch, tag, commit etc.
-collectionspace_tomcat_version: apache-tomcat-8.5.51 # version of tomcat included with server
-collectionspace_server_url: https://s3-us-west-2.amazonaws.com/cs-public-shared-files/releases/7.0/cspace-server-7.0.tar.gz
+  "SPRING_CONFIG_LOCATION": "classpath:/gateway.yml"

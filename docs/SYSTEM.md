@@ -2,8 +2,8 @@
 
 The CollectionSpace application will be available at:
 
-- http://cspace.example.org # without SSL
-- https://cspace.example.org # with SSL
+- http://cspace.example.org/cspace/$TENANT/login # without SSL
+- https://cspace.example.org/cspace/$TENANT/login # with SSL
 
 Replace `cspace.example.org` with your domain or IP address.
 
@@ -16,6 +16,10 @@ Where `$TENANT` is the value of the `collectionspace_tenant` variable
 (i.e. admin@core.collectionspace.org).
 
 **For custom tenants the username is set in the tenants settings.xml.**
+
+The public browser is enabled at the base path:
+
+- http[s]://cspace.example.org/
 
 ## Installer managed components
 
@@ -33,7 +37,7 @@ Role: CollectionSpace application server.
 
 Role: Facilitates access to published data.
 
-- TODO
+- https://cspace.example.org/gateway
 
 ### ElasticSearch
 

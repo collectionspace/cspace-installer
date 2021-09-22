@@ -1,0 +1,26 @@
+---
+
+- name: Create public gateway configuration file
+  template:
+    src: gateway.yml.j2
+    dest: /opt/collectionspace/server/lib/gateway.yml
+    owner: collectionspace
+    group: collectionspace
+
+- name: Create public browser single page app
+  template:
+    src: browser.html.j2
+    dest: "{{ item }}"
+    owner: collectionspace
+    group: collectionspace
+  with_items:
+    - /opt/collectionspace/browser/index.html # nginx
+    - /opt/collectionspace/server/webapps/ROOT/index.html # tomcat
+
+- name: Enable ElasticSearch
+  lineinfile:
+    path: /opt/collectionspace/server/nuxeo-server/config/nuxeo.properties
+    regexp: '^elasticsearch.enabled='
+    line: elasticsearch.enabled=true
+    owner: collectionspace
+    group: collectionspace

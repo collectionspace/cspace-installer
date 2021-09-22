@@ -26,6 +26,11 @@ server {
 	listen [::]:80;
 {% endif %}
 
+{% if collectionspace_browser.enabled %}
+	root /opt/collectionspace/browser;
+	index index.html;
+{% endif %}
+
 	gzip              on;
 	gzip_vary         on;
 	gzip_proxied      any;
@@ -46,15 +51,26 @@ server {
 	proxy_set_header        X-Real-IP          $remote_addr;
 
 	location / {
+{% if collectionspace_browser.enabled %}
+		try_files $uri $uri/ /index.html;
+{% else %}
 		return 301 http://{{ collectionspace_addr }}/cspace/{{ collectionspace_tenant }}/login;
+{% endif %}
 	}
+
+	location /cspace/{{ collectionspace_tenant }}/ {
+		proxy_pass http://collectionspace;
+	}
+
 	location /cspace-services {
 		proxy_pass http://collectionspace;
 	}
+
 	location /cspace-ui/ {
 		proxy_pass http://collectionspace;
 	}
-	location /cspace/{{ collectionspace_tenant }}/ {
+
+	location /gateway {
 		proxy_pass http://collectionspace;
 	}
 }

@@ -29,6 +29,13 @@
     - services
   register: source
 
+- name: Download the CollectionSpace public gateway
+  get_url:
+    url: "{{ collectionspace_gateway_url }}"
+    dest: "/opt/collectionspace/server/webapps/gateway.war"
+    owner: collectionspace
+    group: collectionspace
+
 - name: Ensure CollectionSpace user ownernship
   file:
     path: /opt/collectionspace

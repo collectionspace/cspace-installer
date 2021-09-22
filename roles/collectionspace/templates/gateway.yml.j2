@@ -1,0 +1,13 @@
+zuul:
+  routes:
+    {{ collectionspace_tenant }}-cspace-services:
+      password: gateway4u
+      path: /{{ collectionspace_tenant }}/cspace-services/**
+      url: http://localhost:8180/cspace-services
+      username: gateway@{{ collectionspace_addr }}
+    {{ collectionspace_tenant }}-es:
+      path: /{{ collectionspace_tenant }}/es/**
+      url: http://{{ collectionspace_es_host }}/{{ 'nuxeo' if collectionspace_tenant == 'core' else collectionspace_tenant }}{{ collectionspace_instance_id }}
+{% if collectionspace_tenant_gateway_extras | default(false) %}
+      {{ collectionspace_tenant_gateway_extras | to_nice_yaml(indent=2) | trim | indent(6) }}
+{% endif %}
