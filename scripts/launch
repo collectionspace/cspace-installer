@@ -1,17 +1,25 @@
 #!/bin/bash
 # Note: this is only for launching Packer built cspace instances on AWS
-# ./scripts/launch fcart fineartmuseum # $TENANT $SITE [$DOMAIN]
+# ./scripts/launch core outreach # outreach.collectionspace.org
+# ./scripts/launch fcart fineartmuseum collectionspace.org .tb4yb # fineartmuseum.tb4yb.collectionspace.org
+
+# TODO: check key is present (./scripts/check_key)
+# TODO: check dns is not allocated (./scripts/check_dns)
 
 TENANT=${1:-core}
 SITE=${2:-""}
 DOMAIN=${3:-collectionspace.org}
+SUBDOMAIN=${4:-""}
 INSTANCE_TYPE=t3.medium
 KEY_NAME=aws-cspace-pkr
+FQDN="${SITE}${SUBDOMAIN}.${DOMAIN}"
 
 if [ "$SITE" = "" ]; then
   echo "Site name must be specified to continue!"
   exit 1
 fi
+
+echo "Using FQDN: $FQDN"
 
 IMAGE_ID=$(
   aws ec2 describe-images \
@@ -48,7 +56,7 @@ INSTANCE_ID=$(
     --image-id $IMAGE_ID \
     --instance-type $INSTANCE_TYPE \
     --key-name $KEY_NAME \
-    --tag-specifications "ResourceType=instance,Tags=[{Key=name,Value=cspace-$TENANT-$SITE-$DOMAIN}]" \
+    --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=cspace-$TENANT-$SITE}]" \
     --output text --query 'Instances[*].InstanceId' \
     --profile collectionspace
 )
@@ -84,7 +92,7 @@ if [ "$IP_ADDRESS" = "" ]; then
   exit 1
 fi
 
-./scripts/dns $IP_ADDRESS $SITE $DOMAIN
+./scripts/dns $IP_ADDRESS $SITE $DOMAIN $SUBDOMAIN
 
 echo "Updating instance configuration"
 
@@ -93,9 +101,9 @@ ansible-playbook -i $IP_ADDRESS, collectionspace.yml \
   --private-key ~/.ssh/$KEY_NAME \
   --extra-vars "@vars/build.yml" \
   --extra-vars "collectionspace_tenant=$TENANT" \
-  --extra-vars "collectionspace_addr=$SITE.$DOMAIN" \
+  --extra-vars "collectionspace_addr=$FQDN" \
   --tags=swap,certbot,browser,vhost
 
 echo "Configuration complete!"
-echo "For SSH access use: ssh -i ~/.ssh/$KEY_NAME ubuntu@$SITE.$DOMAIN"
-echo "For web access use: https://$SITE.$DOMAIN/cspace/$TENANT/login"
+echo "For SSH access use: ssh -i ~/.ssh/$KEY_NAME ubuntu@$FQDN"
+echo "For web access use: https://$FQDN/cspace/$TENANT/login"
