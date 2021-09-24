@@ -1,10 +1,12 @@
 #!/bin/bash
 # Note: this is only for adding Route53 entries at AWS
-# ./scripts/dns 101.102.103.104 fineartmuseum # $IP_ADDRESS $SITE [$DOMAIN]
+# ./scripts/dns 101.102.103.104 fineartmuseum # $IP_ADDRESS $SITE [$DOMAIN] [$SUBDOMAIN]
 
 IP_ADDRESS=${1}
 SITE=${2:-""}
 DOMAIN=${3:-collectionspace.org}
+SUBDOMAIN=${4:-""}
+FQDN="${SITE}${SUBDOMAIN}.${DOMAIN}"
 
 if [ "$SITE" = "" ]; then
   echo "Site name must be specified to continue!"
@@ -30,7 +32,7 @@ REQUEST=$(cat <<JSON
     {
       "Action": "CREATE",
       "ResourceRecordSet": {
-        "Name": "${SITE}.${DOMAIN}",
+        "Name": "${FQDN}",
         "Type": "A",
         "TTL": 300,
         "ResourceRecords": [{ "Value": "${IP_ADDRESS}" }]
@@ -42,7 +44,7 @@ JSON
 )
 
 echo $REQUEST > request.json
-echo "Creating DNS record: $SITE.$DOMAIN -> $IP_ADDRESS"
+echo "Creating DNS record: $FQDN -> $IP_ADDRESS"
 
 CHANGE_ID=$(
   aws route53 change-resource-record-sets \

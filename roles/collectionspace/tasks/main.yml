@@ -3,6 +3,11 @@
 - name: Get service facts
   service_facts:
 
+# Ensure our tenant opt is available during the build steps
+- name: Set tenant env key
+  set_fact:
+    tenant_key: CSPACE_{{ collectionspace_tenant | upper }}_CREATE_DISABLED_OPT
+
 - name: Check if initial build was completed
   stat:
     path: /opt/collectionspace/build/bootstrap
@@ -12,7 +17,7 @@
 - import_tasks: setup.yml
 - import_tasks: download.yml
 - import_tasks: build.yml
-  environment: "{{ collectionspace_environment }}"
+  environment: "{{ collectionspace_environment | combine ({ tenant_key : 'false' }) }}"
   when: >
     not bootstrap.stat.exists or
     collectionspace_force_build or
