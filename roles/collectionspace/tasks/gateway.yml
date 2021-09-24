@@ -16,6 +16,8 @@
   with_items:
     - /opt/collectionspace/browser/index.html # nginx
     - /opt/collectionspace/server/webapps/ROOT/index.html # tomcat
+  tags:
+    - browser
 
 - name: Enable ElasticSearch
   lineinfile:

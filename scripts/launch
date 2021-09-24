@@ -94,7 +94,7 @@ ansible-playbook -i $IP_ADDRESS, collectionspace.yml \
   --extra-vars "@vars/build.yml" \
   --extra-vars "collectionspace_tenant=$TENANT" \
   --extra-vars "collectionspace_addr=$SITE.$DOMAIN" \
-  --tags=swap,certbot,vhost
+  --tags=swap,certbot,browser,vhost
 
 echo "Configuration complete!"
 echo "For SSH access use: ssh -i ~/.ssh/$KEY_NAME ubuntu@$SITE.$DOMAIN"
