@@ -6,6 +6,8 @@
     dest: /opt/collectionspace/server/lib/gateway.yml
     owner: collectionspace
     group: collectionspace
+  tags:
+    - gateway
 
 - name: Create public browser single page app
   template:
