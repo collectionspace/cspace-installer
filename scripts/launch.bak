@@ -1,4 +1,7 @@
 #!/bin/bash
+echo "DO NOT USE THIS SCRIPT! ADD TO TB4YB CFG AND RUN ./setup TO PREPARE SITE."
+exit 1
+
 # Note: this is only for launching Packer built cspace instances on AWS
 # ./scripts/launch core outreach # outreach.collectionspace.org
 # ./scripts/launch fcart fineartmuseum collectionspace.org .tb4yb # fineartmuseum.tb4yb.collectionspace.org

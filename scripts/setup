@@ -1,0 +1,12 @@
+#!/bin/bash
+
+TENANT=${1}
+NAME=${2}
+
+ansible-playbook -i ${NAME}.tb4yb.collectionspace.org, collectionspace.yml \
+  --user ubuntu \
+  --private-key ~/.ssh/${NAME}-tb4yb.pem \
+  --extra-vars "@vars/build.yml" \
+  --extra-vars "collectionspace_tenant=${TENANT}" \
+  --extra-vars "collectionspace_addr=${NAME}.tb4yb.collectionspace.org" \
+  --tags=swap,certbot,gateway,browser,vhost
