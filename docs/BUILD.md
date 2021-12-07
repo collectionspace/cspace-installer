@@ -29,8 +29,6 @@ packer build -on-error=ask aws-cspace.pkr.hcl
 
 ## Launch cspace EC2
 
-**Warning: currently the [certbot role](../requirements.yml) needs to be modified.**
-
 Add the site to [containerspace](#) `local.sites.yml` and run terraform to create
 the AWS resources.
 

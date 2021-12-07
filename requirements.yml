@@ -1,11 +1,8 @@
 ---
 
-# ugh, need to add this to line 18: install-with-snap.yml
-# when: ansible_os_family != "Debian"
-# https://github.com/geerlingguy/ansible-role-certbot/pull/152
 - src: https://github.com/geerlingguy/ansible-role-certbot.git
   name: certbot
-  version: 4.1.0
+  version: 5.0.0
 
 - src: https://github.com/geerlingguy/ansible-role-elasticsearch
   name: elasticsearch
