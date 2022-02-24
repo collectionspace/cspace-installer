@@ -8,9 +8,9 @@ certbot_admin_email: no-reply@collectionspace.org
 # for testing with IP addresses (no DNS configured)
 # certbot_certs: []
 
-collectionspace_browser:
-  # Set to false if you will not publish content for public acccess
-  enabled: True
+# Public browser: uncomment this variable (both lines) to disable it
+# collectionspace_browser:
+#   enabled: False
 
 # Password for the csadmin database user (update this and keep it SECRET!)
 collectionspace_csadmin_password: keepmesecretplz
