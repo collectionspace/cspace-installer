@@ -10,7 +10,7 @@ certbot_certs:
   - email: "{{ certbot_admin_email }}"
     domains:
       - "{{ collectionspace_addr }}"
-certbot_create_if_missing: yes
+certbot_create_if_missing: true
 certbot_install_method: snap
 
 # ELASTICSEACH

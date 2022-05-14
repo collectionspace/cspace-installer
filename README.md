@@ -40,10 +40,17 @@ Operating System a few times before settling on a final configuration
 
 See the [documentation](docs/README.md) for full instructions.
 
+## Role gotchas
+
+Elasticsearch role update line#95 in `./roles/elasticsearch/templates/jvm.options.j2`:
+
+```
+-Djava.io.tmpdir=/tmp # replaces: -Djava.io.tmpdir={ES_TMPDIR}
+```
+
 ## Developer Quickstart
 
-Add `ServerAliveInterval 120` to your `~/.ssh/config`. Create server
-with root key access then create `vars/deploy.yml`:
+Add `ServerAliveInterval 120` to your `~/.ssh/config` then create `vars/deploy.yml`:
 
 ```yml
 ---
@@ -55,6 +62,7 @@ collectionspace_force_build: False
 collectionspace_addr: 45.33.112.113
 collectionspace_tenant: core
 permit_root_login: 'no'
+# or, to allow all: - 0.0.0.0/0
 ssh_allowed_ip_addresses:
   - "{{ lookup('url', 'http://checkip.amazonaws.com', split_lines=False) | replace('\n', '') }}"
 users:
@@ -63,10 +71,24 @@ users:
     public_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
 ```
 
-Run it locally (this does not run the security tasks):
+### Run it locally
+
+Install:
+
+- [Ansible](https://www.ansible.com/)
+- [Docker](https://www.docker.com/)
+- [Vagrant](https://www.vagrantup.com/)
+
+Then:
 
 ```bash
+ansible-galaxy install -r requirements.yml --force # update if any gotchas
+
+# Linux/Ubuntu
 sudo apt-get install sshpass
+# Mac/OSX
+brew install hudochenkov/sshpass/sshpass
+
 vagrant plugin install vagrant-hostmanager
 vagrant up
 
@@ -79,16 +101,17 @@ $CSPACE_JEESERVER_HOME/bin/startup.sh
 tail -f $CSPACE_JEESERVER_HOME/logs/catalina.out
 ```
 
-This of course requires that Ansible, Vagrant and Docker are installed but is otherwise
-the easiest and quicket way of getting a local deployment up and running for testing.
+Running locally does not run the security tasks.
 
-Run it using an existing server:
+### Run it using an existing server
 
 ```bash
 DOMAIN_OR_IP=45.33.112.113
 ansible-playbook -i $DOMAIN_OR_IP, security.yml -u root -e @vars/deploy.yml
 ansible-playbook -i $DOMAIN_OR_IP, collectionspace.yml -u deploy -e @vars/deploy.yml
 ```
+
+### Access CollectionSpace
 
 Either way CollectionSpace will be available at: http://{collectionspace_addr}
 

@@ -6,6 +6,7 @@
     dest: /opt/collectionspace/server/lib/gateway.yml
     owner: collectionspace
     group: collectionspace
+    mode: '0644'
   tags:
     - gateway
 
@@ -15,6 +16,7 @@
     dest: "{{ item }}"
     owner: collectionspace
     group: collectionspace
+    mode: '0644'
   with_items:
     - /opt/collectionspace/browser/index.html # nginx
     - /opt/collectionspace/server/webapps/ROOT/index.html # tomcat

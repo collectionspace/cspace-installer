@@ -41,4 +41,7 @@
   file:
     path: "/opt/collectionspace/build/bootstrap"
     state: touch
+    owner: collectionspace
+    group: collectionspace
+    mode: '0644'
   when: not bootstrap.stat.exists

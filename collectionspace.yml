@@ -2,7 +2,7 @@
 
 - hosts: all
   gather_facts: true
-  become: yes
+  become: true
 
   pre_tasks:
     - import_tasks: includes/version.yml
@@ -14,7 +14,7 @@
           - gpg
           - python3-psycopg2
           - "{{ java_package }}"
-        update_cache: yes
+        update_cache: true
       tags:
         - apt
     - name: Create .pgpass

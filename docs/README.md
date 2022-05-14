@@ -1,4 +1,4 @@
-## Requirements
+# Installation
 
 On your local machine install:
 
@@ -96,8 +96,6 @@ git clone https://github.com/collectionspace/cspace-installer.git
 cd cspace-installer
 ansible-galaxy install -r requirements.yml --force
 ```
-
-**Warning: currently the [certbot role](../requirements.yml) needs to be modified.**
 
 ## Running Ansible
 

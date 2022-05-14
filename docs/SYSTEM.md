@@ -1,4 +1,4 @@
-## System overview
+# System overview
 
 The CollectionSpace application will be available at:
 

@@ -3,8 +3,8 @@
 certbot_admin_email: no-reply@collectionspace.org
 collectionspace_csadmin_password: Administrator
 collectionspace_addr: default.collectionspace.org # placeholder
-collectionspace_tenant: False # overriden per provisioner
-permit_dev_ports: False
+collectionspace_tenant: false # overriden per provisioner
+permit_dev_ports: false
 permit_root_login: 'no'
 ssh_allowed_ip_addresses:
   - 0.0.0.0/0 # all

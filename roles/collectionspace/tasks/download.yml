@@ -4,7 +4,7 @@
   unarchive:
     src: "{{ collectionspace_server_url }}"
     dest: /opt/collectionspace
-    remote_src: yes
+    remote_src: true
     owner: collectionspace
     group: collectionspace
   register: server
@@ -23,7 +23,7 @@
     repo: "https://github.com/collectionspace/{{ item }}"
     dest: "/opt/collectionspace/{{ item }}"
     version: "{{ collectionspace_revision }}"
-    force: yes
+    force: true
   with_items:
     - application
     - services
@@ -35,11 +35,12 @@
     dest: "/opt/collectionspace/server/webapps/gateway.war"
     owner: collectionspace
     group: collectionspace
+    mode: '0644'
 
 - name: Ensure CollectionSpace user ownernship
   file:
     path: /opt/collectionspace
     state: directory
-    recurse: yes
+    recurse: true
     owner: collectionspace
     group: collectionspace
