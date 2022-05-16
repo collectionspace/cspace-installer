@@ -2,7 +2,7 @@
 
 - hosts: all
   gather_facts: true
-  become: yes
+  become: true
 
   handlers:
     - name: restart ssh

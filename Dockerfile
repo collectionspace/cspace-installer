@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04
 MAINTAINER mark.cooper@lyrasis.org
 
 RUN (echo 'root'; echo 'root') | passwd root && \

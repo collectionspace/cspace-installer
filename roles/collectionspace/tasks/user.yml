@@ -16,6 +16,7 @@
   file:
     path: /home/collectionspace/.config/environment.d
     state: directory
+    mode: '0755'
 
 - name: Set CollectionSpace user environment variables
   template:
@@ -23,6 +24,7 @@
     dest: /home/collectionspace/.config/environment.d/collectionspace.conf
     owner: collectionspace
     group: collectionspace
+    mode: '0644'
   no_log: true
   register: cspace_env
 

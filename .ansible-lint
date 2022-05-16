@@ -1,0 +1,13 @@
+exclude_paths:
+  - .github/
+  - roles/certbot
+  - roles/elasticsearch
+  - roles/geerlingguy.java
+  - roles/nginx
+  - roles/postgresql
+  - roles/swap
+
+skip_list:
+  - fqcn-builtins
+  - no-changed-when
+  - no-handler

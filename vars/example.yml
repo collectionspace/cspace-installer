@@ -17,7 +17,7 @@ collectionspace_csadmin_password: keepmesecretplz
 
 # Setting this to true will trigger build steps
 # irrespective of other tasks status
-collectionspace_force_build: False
+collectionspace_force_build: false
 
 # IP address or domain name of the server added to DNS
 # (latter can be used by certbot to generate an SSL cert)
@@ -31,7 +31,7 @@ collectionspace_tenant: core
 #####
 
 # Allow additional common dev port access (3000, 8080 etc.)
-permit_dev_ports: False
+permit_dev_ports: false
 
 # Mode for root user login, options:
 # - "no" # disable root user ssh. Note: the quotes are required

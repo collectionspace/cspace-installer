@@ -4,11 +4,12 @@
   template:
     src: service.j2
     dest: "{{ collectionspace_service_path }}"
+    mode: '0644'
 
 - name: Start and enable CollectionSpace
   systemd:
     name: collectionspace
     state: started
-    enabled: yes
-    daemon-reload: yes
+    enabled: true
+    daemon-reload: true
   register: start

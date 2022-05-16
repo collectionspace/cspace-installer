@@ -1,4 +1,4 @@
-## Requirements
+# Installation
 
 On your local machine install:
 
@@ -97,7 +97,9 @@ cd cspace-installer
 ansible-galaxy install -r requirements.yml --force
 ```
 
-**Warning: currently the [certbot role](../requirements.yml) needs to be modified.**
+Before proceeding check for any [role gotchas](../README.md#role-gotchas)
+(workarounds that are required pending review of a more permanent
+solution).
 
 ## Running Ansible
 
