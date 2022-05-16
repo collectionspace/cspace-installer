@@ -61,6 +61,7 @@ collectionspace_force_build: False
 # update this (IP or domain): for vagrant use: "localhost" [wsl], or "collectionspace.local" [native]
 collectionspace_addr: 45.33.112.113
 collectionspace_tenant: core
+permit_dev_ports: false
 permit_root_login: 'no'
 # or, to allow all: - 0.0.0.0/0
 ssh_allowed_ip_addresses:
