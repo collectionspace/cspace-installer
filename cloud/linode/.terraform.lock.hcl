@@ -4,6 +4,7 @@
 provider "registry.terraform.io/hashicorp/local" {
   version = "2.1.0"
   hashes = [
+    "h1:EYZdckuGU3n6APs97nS2LxZm3dDtGqyM4qaIvsmac8o=",
     "h1:KfieWtVyGWwplSoLIB5usKAUnrIkDQBkWaR5TI+4WYg=",
     "zh:0f1ec65101fa35050978d483d6e8916664b7556800348456ff3d09454ac1eae2",
     "zh:36e42ac19f5d68467aacf07e6adcf83c7486f2e5b5f4339e9671f68525fc87ab",
@@ -23,6 +24,7 @@ provider "registry.terraform.io/linode/linode" {
   version = "1.19.1"
   hashes = [
     "h1:/F4GLGc+/OTCeOMVveZ72cq9oWS17DLHu19AkqOb8fc=",
+    "h1:UNXJmnbYmZuwMl1q8O/ix2NcyvEI29cAg91ZOjb1qXU=",
     "zh:1b9f22c1882b1451492341ef28d6776f606a244e8a58340c21dd6949015a229d",
     "zh:2557f3415f85c9570e44fa7f147269d12c1e4bf32b5b21b09a347dcf574967de",
     "zh:414eac8b55c4db6e4c44702ee3b99e4912bc59c213c4c881309b7c7434977644",

@@ -16,7 +16,7 @@ Update the values in `terraform.tfvars`.
 
 Path to an [SSH public key](#) file added to the root account.
 
-### image (default: linode/ubuntu21.04)
+### image (default: linode/ubuntu20.04)
 
 The server operating system image.
 
