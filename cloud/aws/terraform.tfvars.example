@@ -1,0 +1,6 @@
+authorized_key = "~/.ssh/id_rsa.pub"
+availability_zone = "us-west-2a"
+blueprint_id = "ubuntu_20_04"
+bundle_id = "medium_2_0"
+name = "collectionspace"
+profile = "collectionspace"
