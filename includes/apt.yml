@@ -2,8 +2,8 @@
 
 - name: Update and upgrade apt packages
   apt:
-    upgrade: 'True'
-    update_cache: 'True'
+    upgrade: true
+    update_cache: true
     cache_valid_time: 86400
 
 - name: Install packages

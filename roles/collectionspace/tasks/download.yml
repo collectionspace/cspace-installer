@@ -18,6 +18,13 @@
     group: collectionspace
   when: server.changed
 
+- name: Make CollectionSpace download paths git safe
+  shell: |
+    git config --global --add safe.directory "/opt/collectionspace/{{ item }}"
+  with_items:
+    - application
+    - services
+
 - name: Download the CollectionSpace applications
   git:
     repo: "https://github.com/collectionspace/{{ item }}"

@@ -28,7 +28,7 @@
 
   roles:
     - role: swap
-      tags: ['never', 'swap']
+      tags: ['swap']
     - role: postgresql
       tags: ['db', 'postgres']
     - role: elasticsearch
