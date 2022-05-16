@@ -29,6 +29,7 @@
   roles:
     - role: swap
       tags: ['swap']
+      when: not collectionspace_vagrant | default(false)
     - role: postgresql
       tags: ['db', 'postgres']
     - role: elasticsearch
@@ -53,8 +54,6 @@
         - vhost
         - web
 
-    # TODO: initialize reports
-
     # do this last to minimize wait on startup initialization
     - name: Check that CollectionSpace is up before exiting
       uri:
@@ -66,3 +65,4 @@
       until: result.status == 200
       retries: 15
       delay: 60
+      when: not collectionspace_vagrant | default(false)

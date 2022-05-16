@@ -20,7 +20,7 @@ Vagrant.configure('2') do |config|
 
   config.vm.hostname = 'collectionspace.local'
   # we use port 80 to avoid cspace-ui CORS complications
-  config.vm.network 'forwarded_port', guest: 80, host: 80, host_ip: '127.0.0.1', auto_correct: true
+  config.vm.network 'forwarded_port', guest: 80, host: 80, host_ip: '0.0.0.0', auto_correct: true
   config.vm.provision :hostmanager
   config.vm.provision :ansible do |ansible|
     ansible.become = true

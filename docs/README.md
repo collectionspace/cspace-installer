@@ -97,6 +97,10 @@ cd cspace-installer
 ansible-galaxy install -r requirements.yml --force
 ```
 
+Before proceeding check for any [role gotchas](../README.md#role-gotchas)
+(workarounds that are required pending review of a more permanent
+solution).
+
 ## Running Ansible
 
 For Ansible to setup CollectionSpace on your server you will need to
