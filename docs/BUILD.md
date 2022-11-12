@@ -30,7 +30,7 @@ packer build -on-error=ask aws-cspace.pkr.hcl
 ## Launch cspace EC2
 
 Add the site to [containerspace](#) `local.sites.yml` and run terraform to create
-the AWS resources.
+the AWS resources. Next:
 
 ```bash
 ./scripts/setup $TENANT $NAME
@@ -41,6 +41,18 @@ This will create:
 
 - SSH: `ssh -i ~/.ssh/museum-tb4yb.pem ubuntu@museum.tb4yb.collectionspace.org`
 - Web: https://museum.tb4yb.collectionspace.org/cspace/fcart/login
+
+_Note: if didn't create the AWS resources then get the key from containerspace._
+
+When CollectionSpace is running login and create the gateway user:
+
+```txt
+Username: gateway@$NAME.tb4yb.collectionspace.org
+Password: gateway4u
+Roles:    TENANT_READER (checked)
+```
+
+On the server restart CollectionSpace: `service collectionspace restart`. Done!
 
 To delete the resources remove the site entry in `local.sites.yml` and run
 terraform to teardown the site.
