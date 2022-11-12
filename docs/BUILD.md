@@ -52,7 +52,11 @@ Password: gateway4u
 Roles:    TENANT_READER (checked)
 ```
 
-On the server restart CollectionSpace: `service collectionspace restart`. Done!
+On the server restart CollectionSpace: `service collectionspace restart`.
+
+Now add the site to the "TB4YB tracker" list for Outreach. Done!
+
+## Teardown cspace EC2
 
 To delete the resources remove the site entry in `local.sites.yml` and run
 terraform to teardown the site.
