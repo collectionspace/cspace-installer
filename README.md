@@ -108,7 +108,7 @@ Running locally does not run the security tasks.
 
 ```bash
 DOMAIN_OR_IP=45.33.112.113
-ansible-playbook -i $DOMAIN_OR_IP, security.yml -u root -e @vars/deploy.yml
+ansible-playbook -i $DOMAIN_OR_IP, security.yml -u root -e @vars/deploy.yml # -u ubuntu (for lightsail)
 ansible-playbook -i $DOMAIN_OR_IP, collectionspace.yml -u deploy -e @vars/deploy.yml
 ```
 
