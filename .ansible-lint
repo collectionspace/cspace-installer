@@ -8,6 +8,8 @@ exclude_paths:
   - roles/swap
 
 skip_list:
+  - command-instead-of-module
   - fqcn-builtins
+  - name[missing]
   - no-changed-when
   - no-handler
