@@ -1,0 +1,23 @@
+name: Lint
+
+on: [pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Run ansible lint
+        uses: ansible-community/ansible-lint-action@main
+
+      - name: Setup packer
+        uses: hashicorp/setup-packer@main
+        with:
+          version: latest
+
+      - name: Run packer fmt
+        run: packer fmt ./aws-cspace.pkr.hcl
