@@ -2,19 +2,19 @@
 
 - src: https://github.com/geerlingguy/ansible-role-certbot.git
   name: certbot
-  version: 5.0.1
+  version: 5.0.2
 
 - src: https://github.com/geerlingguy/ansible-role-elasticsearch
   name: elasticsearch
-  version: 5.1.0
+  version: 5.1.1
 
 - src: https://github.com/geerlingguy/ansible-role-nginx
   name: nginx
-  version: 3.1.1
+  version: 3.1.4
 
 - src: https://github.com/geerlingguy/ansible-role-postgresql
   name: postgresql
-  version: 3.2.1
+  version: 3.4.3
 
 - src: https://github.com/geerlingguy/ansible-role-swap
   name: swap
