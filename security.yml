@@ -1,11 +1,12 @@
 ---
 
-- hosts: all
+- name: Set CollectionSpace security options
+  hosts: all
   gather_facts: true
   become: true
 
   handlers:
-    - name: restart ssh
+    - name: Restart SSH
       service:
         name: ssh
         state: restarted
