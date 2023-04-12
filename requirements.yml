@@ -1,5 +1,11 @@
 ---
 
+collections:
+- name: community.general
+  version: latest
+  source: https://galaxy.ansible.com
+
+roles:
 - src: https://github.com/geerlingguy/ansible-role-certbot.git
   name: certbot
   version: 5.0.1
