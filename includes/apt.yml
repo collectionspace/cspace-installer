@@ -6,9 +6,9 @@
     state: present
     update_cache: true
   with_items:
-    - "deb http://us.archive.ubuntu.com/ubuntu jammy universe"
-    - "deb http://us.archive.ubuntu.com/ubuntu jammy-updates universe"
-    - "deb http://security.ubuntu.com/ubuntu jammy-security universe"
+    - "deb http://us.archive.ubuntu.com/ubuntu {{ ansible_distribution_release }} universe"
+    - "deb http://us.archive.ubuntu.com/ubuntu {{ ansible_distribution_release }}-updates universe"
+    - "deb http://security.ubuntu.com/ubuntu {{ ansible_distribution_release }}-security universe"
 
 - name: Update and upgrade apt packages
   apt:
