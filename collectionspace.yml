@@ -41,7 +41,7 @@
       tags: ['nginx', 'web']
     - role: certbot
       tags: ['certbot', 'certs']
-      when: certbot_certs | length > 0
+      when: certbot_certs is defined and certbot_certs | length > 0
 
   tasks:
     - name: Create CollectionSpace vhost config
