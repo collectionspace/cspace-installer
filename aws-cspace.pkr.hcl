@@ -15,7 +15,7 @@ variable "ami_prefix" {
 // TODO: get this from vars
 variable "revision" {
   type    = string
-  default = "v7.0-branch"
+  default = "v7.1-branch"
 }
 
 variable "root_volume_size_gb" {
@@ -43,7 +43,7 @@ source "amazon-ebs" "ubuntu" {
 
   source_ami_filter {
     filters = {
-      name                = "ubuntu/images/*ubuntu-focal-20.04-amd64-server-*"
+      name                = "ubuntu/images/*ubuntu-jammy-22.04-amd64-server-*"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
