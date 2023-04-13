@@ -33,11 +33,10 @@
   register: casts
 
 - name: Setup datatype casts
-  postgresql_query:
+  community.postgresql.postgresql_script:
     db: template1
     login_host: localhost
     login_user: csadmin
     login_password: "{{ collectionspace_csadmin_password }}"
-    path_to_script: /root/casts.sql
-    as_single_query: true
+    path: /root/casts.sql
   when: casts.changed

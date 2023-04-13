@@ -8,4 +8,4 @@
     line: "{{ item.key }} {{ item.value }}"
   loop: "{{ ssh_config }}"
   notify:
-    - restart ssh
+    - Restart SSH

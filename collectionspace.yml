@@ -1,6 +1,6 @@
 ---
-
-- hosts: all
+- name: Install CollectionSpace
+  hosts: all
   gather_facts: true
   become: true
 
@@ -22,10 +22,16 @@
       template:
         src: templates/pgpass.j2
         dest: /root/.pgpass
-        mode: 0600
+        mode: '0600'
       tags:
         - db
         - postgres
+    - name: Patch ElasticSearch role
+      delegate_to: localhost
+      ansible.builtin.lineinfile:
+        path: roles/elasticsearch/templates/jvm.options.j2
+        regexp: '^-Djava\.io\.tmpdir='
+        line: '-Djava.io.tmpdir=/tmp'
 
   roles:
     - role: swap
@@ -48,7 +54,7 @@
       template:
         src: templates/cspace.conf.j2
         dest: "/etc/nginx/sites-enabled/cspace.conf"
-        mode: 0644
+        mode: '0644'
       notify: reload nginx
       tags:
         - nginx

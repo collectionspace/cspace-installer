@@ -17,7 +17,7 @@
 - import_tasks: setup.yml
 - import_tasks: download.yml
 - import_tasks: build.yml
-  environment: "{{ collectionspace_environment | combine ({ tenant_key : 'false' }) }}"
+  environment: "{{ collectionspace_environment | combine({tenant_key: 'false'}) }}"
   when: >
     not bootstrap.stat.exists or
     collectionspace_force_build or
