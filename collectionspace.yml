@@ -5,6 +5,7 @@
   become: true
 
   pre_tasks:
+    - import_tasks: version_check.yml
     - import_tasks: includes/version.yml
     - name: Install packages
       apt:

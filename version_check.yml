@@ -1,0 +1,32 @@
+---
+
+- name: Get the version of CollectionSpace from Packer
+  ansible.builtin.slurp:
+    src: "{{ playbook_dir }}/aws-cspace.pkr.hcl"
+  register: cspace_packer_file
+  delegate_to: localhost
+
+- name: Get the version of CollectionSpace from the Ansible role
+  ansible.builtin.slurp:
+    src: "{{ playbook_dir }}/roles/collectionspace/defaults/main.yml"
+  register: cspace_role_file
+  delegate_to: localhost
+
+- name: Set version variables from files
+  ansible.builtin.set_fact:
+    cspace_packer_version: "{{ cspace_packer_file.content | b64decode | regex_findall('default = \"v([^\"]+)\"') | first }}"
+    cspace_role_version: "{{ cspace_role_file.content | b64decode | regex_findall('collectionspace_revision: v([^ ]+)') | first }}"
+
+- name: Show versions
+  ansible.builtin.debug:
+    msg:
+      - "CollectionSpace version from aws-cspace.pkr.yml: {{ cspace_packer_version }}"
+      - "CollectionSpace version from roles/collectionspace/defaults/main.yml: {{ cspace_role_version }}"
+
+- name: Verify that CollectionSpace versions are identical
+  ansible.builtin.fail:
+    msg:
+      - "Conflicting CollectionSpace versions found, ensure versions are the same in:"
+      - "aws-cspace.pkr.yml"
+      - "roles/collectionspace/defaults/main.yml"
+  when: cspace_packer_version != cspace_role_version
