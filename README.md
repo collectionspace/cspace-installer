@@ -40,14 +40,6 @@ Operating System a few times before settling on a final configuration
 
 See the [documentation](docs/README.md) for full instructions.
 
-## Role gotchas
-
-Elasticsearch role update line#95 in `./roles/elasticsearch/templates/jvm.options.j2`:
-
-```
--Djava.io.tmpdir=/tmp # replaces: -Djava.io.tmpdir={ES_TMPDIR}
-```
-
 ## Developer Quickstart
 
 Add `ServerAliveInterval 120` to your `~/.ssh/config` then create `vars/deploy.yml`:
