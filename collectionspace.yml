@@ -32,6 +32,19 @@
         path: roles/elasticsearch/templates/jvm.options.j2
         regexp: '^-Djava\.io\.tmpdir='
         line: '-Djava.io.tmpdir=/tmp'
+    - name: Patch swap role
+      delegate_to: localhost
+      ansible.builtin.lineinfile:
+        path: roles/swap/tasks/main.yml
+        regexp: '^\s+mount:$'
+        line: '  ansible.posix.mount:'
+    - name: Patch Postgres role
+      delegate_to: localhost
+      ansible.builtin.lineinfile:
+        path: roles/postgresql/tasks/users.yml
+        regexp: '^\s+postgresql_user:$'
+        line: '  community.postgresql.postgresql_user:'
+
 
   roles:
     - role: swap

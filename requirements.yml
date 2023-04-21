@@ -1,7 +1,9 @@
 ---
 
 collections:
+- name: ansible.posix
 - name: community.general
+- name: community.postgresql
 
 roles:
 - src: https://github.com/geerlingguy/ansible-role-certbot.git
