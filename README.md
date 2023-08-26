@@ -1,5 +1,9 @@
 # CollectionSpace Installer
 
+**This project is archived and no longer maintained. Please refer to the
+[CollectionSpace documentation](https://collectionspace.atlassian.net/wiki/spaces/COL/overview)
+for installtion instructions.**
+
 ![](https://github.com/collectionspace/cspace-installer/workflows/Lint%20Installer/badge.svg)
 
 The installer provides an [Ansible](https://www.ansible.com/) playbook
